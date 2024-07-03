@@ -1,0 +1,25 @@
+import { Family } from '../types/Family';
+
+export const familias: Family[] = [
+  { nome: 'Le petit' },
+  { nome: 'Di Drill' },
+  { nome: 'Di Fruti' },
+  { nome: 'Di Leiti' },
+  { nome: 'Especialité' },
+  { nome: 'Paletas Mexicanas' },
+  { nome: 'Extrusado Absoluto' },
+  { nome: 'Extrusado Classic' },
+  { nome: 'Di Açaí' },
+  { nome: 'Extrusados Premiatto' },
+  { nome: 'Mini Extrusado' },
+  { nome: 'Di Infantil' },
+  { nome: 'Cones Divine' },
+  { nome: 'Sundae' },
+  { nome: 'Copão 400Ml' },
+  { nome: 'Copo 400ml Splendido' },
+  { nome: 'Potes 1,0 Litros Gormet' },
+  { nome: 'Potes 1,5 Litros Sorbet' },
+  { nome: 'Potes 1,8 Litros' },
+  { nome: 'Potes 2,0 Litros' },
+  { nome: 'Potes 7,0 Litros' },
+];
