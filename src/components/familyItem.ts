@@ -16,7 +16,9 @@ export function familyItem(family: Family) {
     </button>
     </h2>
     <div id="${removeInvalidChar(family.nome)}" class="accordion-collapse collapse" data-bs-parent="#content">
-        <div class="accordion-body p-0 pt-1 family" id="${removeInvalidChar(family.nome)}Items"></div>
+        <div class="accordion-body p-0 pt-1 family" title="${family.nome}" id="${removeInvalidChar(
+    family.nome
+  )}Items"></div>
     </div>
 </div>`;
 }

@@ -13,13 +13,13 @@ export function productItem(produto: Product) {
         <div class="p-0 m-0 col-2">Custo</div>
         <div class="p-0 m-0 col-3 text-center">R$ ${produto.custo}</div>
         <div class="p-0 m-0 col-3">Sugerido</div>
-        <div class="p-0 m-0 col-4 text-end">R$ ${produto.sugestao} (${calcPercent(produto)}%)</div>
+        <div class="p-0 m-0 col-4 text-end">R$ ${produto.sugestao.toFixed(2)} (${calcPercent(produto)}%)</div>
     </div>`;
 
   if (produto.caixa === true) {
     line += `<div class="row">
         <div class="p-0 m-0 col-6">Caixa com: <span>${produto.caixaQt}</span></div>
-        <div class="p-0 m-0 col-6 text-end">R$ <span id="valorCaixa">${calcBoxValue(produto)}</span></div>
+        <div class="p-0 m-0 col-6 text-end">R$ <span id="valorCaixa">${calcBoxValue(produto).toFixed(2)}</span></div>
         </div>`;
   }
 

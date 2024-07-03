@@ -82,7 +82,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '15',
@@ -91,7 +91,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '16',
@@ -100,7 +100,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '17',
@@ -109,7 +109,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '18',
@@ -118,7 +118,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '19',
@@ -127,7 +127,7 @@ export const produtos: Product[] = [
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
-    familia: 'Di Leite',
+    familia: 'Di Leiti',
   },
   {
     id: '21',

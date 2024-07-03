@@ -1,9 +1,13 @@
 import { Product } from '../types/Product';
 
 export function calcPercent(produto: Product) {
-  let value = 0;
+  let v1 = produto.sugestao / produto.custo;
 
-  value = Number((produto.sugestao / produto.custo - 1).toFixed(0));
+  let v2 = v1 - 1;
 
-  return value;
+  let v3 = v2 * 100;
+
+  let v4 = v3.toFixed(0);
+
+  return v4;
 }

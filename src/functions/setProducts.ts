@@ -1,13 +1,13 @@
 import { productItem } from '../components/productItem';
 import { Product } from '../types/Product';
-import { removeInvalidChar } from '../utils/removeInvalidChar';
 
 export function setProducts(products: Product[]) {
-  const familiesSpot = document.querySelectorAll('.family');
+  const familiesSpot = <NodeListOf<HTMLElement>>document.querySelectorAll('.family');
 
   familiesSpot.forEach((element) => {
+    console.log(element.title);
     products.forEach((product) => {
-      if (element.id === `${removeInvalidChar(product.familia)}Items`) {
+      if (element.title === product.familia) {
         element.innerHTML += productItem(product);
       }
     });
