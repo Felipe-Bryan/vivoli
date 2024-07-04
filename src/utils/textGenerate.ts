@@ -22,11 +22,11 @@ export function textGenerate(order: Order[]) {
         line += `\n*Quantidade:* ${item.qt} un`;
       }
 
-      line += `\n*Total item:* ${cashInfo(value)}\n- - - - - - - - - - - - -`;
+      line += `\n*Total item:* ${cashInfo(value)}\n- - - - - - - - - - - - - - - -\n`;
     }
   });
 
-  line += `\n*Total pedido: *${calcTotalvalueOrders(order)}`;
+  line += `\n\n*Total pedido: *${calcTotalvalueOrders(order)}`;
 
   return line;
 }
