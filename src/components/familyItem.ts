@@ -1,5 +1,4 @@
 import { Family } from '../types/Family';
-import { removeInvalidChar } from '../utils/removeInvalidChar';
 
 export function familyItem(family: Family) {
   return `
@@ -9,16 +8,14 @@ export function familyItem(family: Family) {
         class="accordion-button collapsed"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#${removeInvalidChar(family.nome)}"
+        data-bs-target="#${`family${family.id}`}"
         aria-expanded="false"
-        aria-controls="${removeInvalidChar(family.nome)}">
+        aria-controls="${`family${family.id}`}">
         ${family.nome}
     </button>
     </h2>
-    <div id="${removeInvalidChar(family.nome)}" class="accordion-collapse collapse" data-bs-parent="#content">
-        <div class="accordion-body p-0 pt-1 family" title="${family.nome}" id="${removeInvalidChar(
-    family.nome
-  )}Items"></div>
+    <div id="${`family${family.id}`}" class="accordion-collapse collapse" data-bs-parent="#content">
+        <div class="accordion-body p-0 pt-1 family" id="${family.id}Items"></div>
     </div>
 </div>`;
 }

@@ -1,19 +1,19 @@
 export function saveToStorage(key: string, data: any) {
-  return localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
 export function saveToSessionStorage(key: string, data: any) {
-  return sessionStorage.setItem(key, JSON.stringify(data));
+  sessionStorage.setItem(key, JSON.stringify(data));
 }
 
 export function getStorageData(key: string) {
-  const result = JSON.parse(localStorage.getItem(key) || '');
+  const data = JSON.parse(localStorage.getItem(key) || '[]');
 
-  return result;
+  return data;
 }
 
 export function getSessionStorageData(key: string) {
-  const result = JSON.parse(sessionStorage.getItem(key) || '');
+  const data = JSON.parse(sessionStorage.getItem(key) || '[]');
 
-  return result;
+  return data;
 }

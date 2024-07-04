@@ -1,10 +1,20 @@
-import { familias } from './database/familias';
 import { produtos } from './database/produtos';
-import { setFamilies } from './functions/setFamilies';
-import { setProducts } from './functions/setProducts';
+import { setEmptyOrder } from './functions/setEmptyOrder';
+import { startCart } from './pages/cart/startCart';
+import { startHome } from './pages/home/startHome';
 import { getUrlValue } from './utils/getUrlValue';
 
-setFamilies(familias);
-setProducts(produtos);
+setEmptyOrder(produtos);
+startHome();
 
-console.log(getUrlValue('t'));
+document.getElementById('viewOrder')!.addEventListener('click', () => {
+  startCart();
+});
+
+document.getElementById('sendOrder')!.addEventListener('click', () => {
+  console.log(`enviar para ${getUrlValue('t')}`);
+});
+
+document.getElementById('homeReturn')!.addEventListener('click', () => {
+  startHome();
+});

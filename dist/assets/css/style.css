@@ -33,3 +33,7 @@ body {
 .img-logo {
   height: 5rem;
 }
+
+#cartContent {
+  min-height: 95vh;
+}
