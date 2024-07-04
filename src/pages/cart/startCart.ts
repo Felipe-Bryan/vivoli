@@ -1,4 +1,5 @@
 import { productCartItem } from '../../components/productCartItem';
+import { sendOrder } from '../../functions/sendOrder';
 import { Order } from '../../types/Order';
 import { componentVisibility } from '../../utils/componentVisibility';
 import { getStorageData } from '../../utils/storageFunctions';
@@ -20,5 +21,11 @@ export function startCart() {
     if (item.qt > 0) {
       spot.innerHTML += productCartItem(item);
     }
+  });
+
+  document.getElementById('sendOrder')!.addEventListener('click', () => {
+    const updateOrder: Order[] = getStorageData('order');
+
+    sendOrder(updateOrder);
   });
 }
