@@ -11,7 +11,7 @@ export function productCartItem(order: Order) {
   }
 
   let line = `
-<div class="row border-bottom border-top border-black bg-light">
+<div class="row border-bottom border-top border-black bg-light px-1">
     <div class="m-0 p-0 col-7">${order.nome}</div>`;
 
   if (order.caixa === true) {
