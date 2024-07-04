@@ -15,5 +15,5 @@ export function calcTotalvalueOrders(orders: Order[]) {
 
   spot.innerHTML = cashInfo(total);
 
-  return total;
+  return cashInfo(total);
 }

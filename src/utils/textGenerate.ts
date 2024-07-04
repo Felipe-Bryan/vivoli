@@ -17,16 +17,16 @@ export function textGenerate(order: Order[]) {
       line += `*${item.nome}*`;
 
       if (item.caixa === true) {
-        line += `*Quantidade:* ${item.qt} cx`;
+        line += `\n*Quantidade:* ${item.qt} cx`;
       } else {
-        line += `*Quantidade:* ${item.qt} un`;
+        line += `\n*Quantidade:* ${item.qt} un`;
       }
 
-      line += `*Total item:* ${cashInfo(value)}\n- - - - - - - - - - - - -`;
+      line += `\n*Total item:* ${cashInfo(value)}\n- - - - - - - - - - - - -`;
     }
   });
 
-  line += `*Total pedido: *${calcTotalvalueOrders(order)}`;
+  line += `\n*Total pedido: *${calcTotalvalueOrders(order)}`;
 
   return line;
 }
