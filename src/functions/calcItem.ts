@@ -1,4 +1,5 @@
 import { Order } from '../types/Order';
+import { cashInfo } from '../utils/cashInfo';
 
 export function calcItem(product: Order) {
   let value = 0;
@@ -10,9 +11,9 @@ export function calcItem(product: Order) {
     value = product.qt * product.custo;
   }
 
-  spot.innerHTML = `R$ ${value.toLocaleString('pt-BR', {
-    style: 'decimal',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
+  const result = cashInfo(value);
+
+  spot.innerHTML = result;
+
+  return result;
 }

@@ -1,4 +1,6 @@
 import { productCartItem } from '../../components/productCartItem';
+import { addCartOrder } from '../../functions/addCartOrder';
+import { removeCartOrder } from '../../functions/removeCartOrder';
 import { sendOrder } from '../../functions/sendOrder';
 import { Order } from '../../types/Order';
 import { componentVisibility } from '../../utils/componentVisibility';
@@ -27,5 +29,24 @@ export function startCart() {
     const updateOrder: Order[] = getStorageData('order');
 
     sendOrder(updateOrder);
+  });
+
+  const addBtns = document.querySelectorAll('.addCartOrder');
+  const removeBtns = document.querySelectorAll('.removeCartOrder');
+
+  addBtns.forEach((btn) => {
+    const id = btn.id.replace('addCart', '');
+
+    btn.addEventListener('click', () => {
+      addCartOrder(id);
+    });
+  });
+
+  removeBtns.forEach((btn) => {
+    const id = btn.id.replace('removeCart', '');
+
+    btn.addEventListener('click', () => {
+      removeCartOrder(id);
+    });
   });
 }
