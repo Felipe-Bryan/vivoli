@@ -10,21 +10,27 @@ export function sendOrder() {
 
   const orderValue = calcTotalvalueOrdersToSend(order);
 
-  if (orderValue < 350) {
-    alertModal('Atenção', 'Pedido deve ser superior a R$ 350,00', 'Fechar');
+  setTimeout(() => {
+    if (orderValue > 350) {
+      const phone = getUrlValue('t');
 
-    document.getElementById('openModal')!.click();
+      const msgContent = encodeURIComponent(textGenerate(order));
 
-    return;
-  }
+      const link = `https://wa.me/55${phone}?text=${msgContent}`;
 
-  const phone = getUrlValue('t');
+      alertModal('Enviando', 'Você será redirecionado ao WhatsApp', 'Fechar');
 
-  const msgContent = encodeURIComponent(textGenerate(order));
+      document.getElementById('openModal')!.click();
 
-  const link = `https://wa.me/55${phone}?text=${msgContent}`;
+      window.location.replace(link);
 
-  window.location.replace(link);
+      localStorage.removeItem('order');
+    } else {
+      alertModal('Atenção', 'Pedido deve ser superior a R$ 350,00', 'Fechar');
 
-  localStorage.removeItem('order');
+      document.getElementById('openModal')!.click();
+
+      return;
+    }
+  }, 1000);
 }
