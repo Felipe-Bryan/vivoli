@@ -7,16 +7,23 @@ export function textGenerate(order: Order[]) {
   let value = 0;
 
   order.forEach((item) => {
-    if (item.caixa === true) {
-      value = item.caixaQt * item.custo * item.qt;
-    } else {
-      value = item.qt * item.custo;
-    }
+    if (item.qt > 0) {
+      if (item.caixa === true) {
+        value = item.caixaQt * item.custo * item.qt;
+      } else {
+        value = item.qt * item.custo;
+      }
 
-    line += `*${item.nome}*
-\n*Quantidade:* ${item.qt}
-\n*Total item:* ${cashInfo(value)}
-\n`;
+      line += `*${item.nome}*`;
+
+      if (item.caixa === true) {
+        line += `*Quantidade:* ${item.qt} cx`;
+      } else {
+        line += `*Quantidade:* ${item.qt} un`;
+      }
+
+      line += `*Total item:* ${cashInfo(value)}\n- - - - - - - - - - - - -`;
+    }
   });
 
   line += `*Total pedido: *${calcTotalvalueOrders(order)}`;
