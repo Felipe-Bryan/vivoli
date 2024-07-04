@@ -1,10 +1,10 @@
-import { produtos } from './database/produtos';
-import { setEmptyOrder } from './functions/setEmptyOrder';
+import { checkOrder } from './functions/checkOrder';
+import { sendOrder } from './functions/sendOrder';
 import { startCart } from './pages/cart/startCart';
 import { startHome } from './pages/home/startHome';
-import { getUrlValue } from './utils/getUrlValue';
 
-setEmptyOrder(produtos);
+checkOrder();
+
 startHome();
 
 document.getElementById('viewOrder')!.addEventListener('click', () => {
@@ -12,7 +12,7 @@ document.getElementById('viewOrder')!.addEventListener('click', () => {
 });
 
 document.getElementById('sendOrder')!.addEventListener('click', () => {
-  console.log(`enviar para ${getUrlValue('t')}`);
+  sendOrder();
 });
 
 document.getElementById('homeReturn')!.addEventListener('click', () => {

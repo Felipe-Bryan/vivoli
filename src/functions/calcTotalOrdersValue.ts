@@ -17,3 +17,17 @@ export function calcTotalvalueOrders(orders: Order[]) {
 
   return cashInfo(total);
 }
+
+export function calcTotalvalueOrdersToSend(orders: Order[]) {
+  let total = 0;
+
+  orders.forEach((order) => {
+    if (order.caixa === true) {
+      total += order.caixaQt * order.custo * order.qt;
+    } else {
+      total += order.qt * order.custo;
+    }
+  });
+
+  return total;
+}

@@ -26,9 +26,7 @@ export function startCart() {
   });
 
   document.getElementById('sendOrder')!.addEventListener('click', () => {
-    const updateOrder: Order[] = getStorageData('order');
-
-    sendOrder(updateOrder);
+    sendOrder();
   });
 
   const addBtns = document.querySelectorAll('.addCartOrder');
