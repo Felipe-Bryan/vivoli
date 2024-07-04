@@ -15,7 +15,7 @@ export function addCartOrder(id: string) {
     product.qt++;
 
     if (product.caixa === true) {
-      spot.innerHTML = `${product.qt} (${product.qt * product.caixaQt})`;
+      spot.innerHTML = `${product.qt * product.caixaQt} - ${product.qt}`;
     } else {
       spot.innerHTML = `${product.qt}`;
     }

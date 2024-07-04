@@ -10,6 +10,6 @@ export function alertModal(title: string, body: string, returnOption: string, fo
     `;
   } else {
     document.getElementById('modalFooter')!.innerHTML = `
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${returnOption}</button>`;
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="returnOption">${returnOption}</button>`;
   }
 }

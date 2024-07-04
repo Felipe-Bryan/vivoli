@@ -12,11 +12,47 @@ export function checkOrder() {
   } else {
     let ordered = 0;
 
-    order.forEach((product) => {
-      if (product.qt > 0) {
+    for (let i = 0; i < order.length; i++) {
+      if (order[i].caixa !== produtos[i].caixa) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].custo !== produtos[i].custo) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].sugestao !== produtos[i].sugestao) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].nome !== produtos[i].nome) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].caixaQt !== produtos[i].caixaQt) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].familia !== produtos[i].familia) {
+        updateAlert();
+
+        return;
+      }
+
+      if (order[i].qt > 0) {
         ordered++;
       }
-    });
+    }
 
     if (ordered > 0) {
       alertModal(
@@ -35,4 +71,20 @@ export function checkOrder() {
       });
     }
   }
+}
+
+function updateAlert() {
+  alertModal(
+    'Atenção',
+    'Houve uma atualização nos produtos, o pedido salvo será deletado para que as atualizações façam efeito',
+    'Fechar'
+  );
+
+  document.getElementById('openModal')!.click();
+
+  document.getElementById('returnOption')!.addEventListener('click', () => {
+    setEmptyOrder(produtos);
+
+    window.location.reload();
+  });
 }

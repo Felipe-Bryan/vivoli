@@ -32,7 +32,7 @@ export const produtos: Product[] = [
     familia: '6',
   },
   { id: '10', nome: 'Picolé Di Fruta Abacaxi', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
-  { id: '11', nome: 'Picolé Di FrutaLimão', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
+  { id: '11', nome: 'Picolé Di Fruta Limão', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
   { id: '12', nome: 'Picolé Di Fruta Maracujá', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
   { id: '13', nome: 'Picolé Di Fruta Uva', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
   { id: '15', nome: 'Picolé Di Leite Chocolate', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },

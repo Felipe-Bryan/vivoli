@@ -33,11 +33,15 @@ export function productItem(order: Order) {
       <div class="row d-flex align-items-center justify-content-end my-1">
         <div class="col-3 col-sm-1 d-flex align-items-center justify-content-center">
           <button type="button" class="btn btn-danger removeBtn" id="remove${order.id}"><i class="bi bi-dash"></i></button>
-        </div>
+        </div>`;
 
-        <div class="col-3 col-sm-1 text-center" id="orderQt${order.id}">${order.qt}</div>
+  if (order.caixa === true) {
+    line += `<div class="col-3 col-sm-1 text-center"><span id="orderQt${order.id}">${order.qt}</span> cx</div>`;
+  } else {
+    line += `<div class="col-3 col-sm-1 text-center"><span id="orderQt${order.id}">${order.qt}</span> un</div>`;
+  }
 
-        <div class="col-3 col-sm-1 d-flex align-items-center justify-content-center">
+  line += `<div class="col-3 col-sm-1 d-flex align-items-center justify-content-center">
           <button type="button" class="btn btn-success addBtn" id="add${order.id}"><i class="bi bi-plus"></i></button>
         </div>
     </div>

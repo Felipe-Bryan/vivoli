@@ -12,14 +12,17 @@ export function productCartItem(order: Order) {
 
   let line = `
 <div class="row border-bottom border-top border-black bg-light px-1">
-    <div class="m-0 p-0 col-7">${order.nome}</div>`;
+    <div class="m-0 p-0 col-6">${order.nome}</div>`;
 
   if (order.caixa === true) {
-    line += `<div class="m-0 p-0 col-2 text-center" id="cartQt${order.id}">${order.qt} (${
-      order.qt * order.caixaQt
-    })</div>`;
+    line += `<div 
+                class="m-0 p-0 col-3
+                text-center"> <span id="cartQt${order.id}">${order.qt * order.caixaQt} - ${order.qt}</span> cx</div>`;
   } else {
-    line += `<div class="m-0 p-0 col-2 text-center" id="cartQt${order.id}">${order.qt}</div>`;
+    line += `
+    <div class="m-0 p-0 col-3 text-center" >
+        <span id="cartQt${order.id}">${order.qt}</span> un
+    </div>`;
   }
 
   line += `<div class="m-0 p-0 col-3 text-end" id="cartValue${order.id}">${cashInfo(itemTotal)}</div>
