@@ -26,7 +26,7 @@ export function textGenerate(order: Order[]) {
     }
   });
 
-  line += `\n\n*Total pedido:* ${calcTotalvalueOrders(order)}`;
+  line += `\n*Total pedido:* ${calcTotalvalueOrders(order)}`;
 
   return line;
 }
