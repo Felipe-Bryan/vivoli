@@ -4,17 +4,19 @@ import { saveToSessionStorage } from '../utils/handleStorage';
 import { removeInvalidChar } from '../utils/removeInvalidChar';
 
 export async function searchLocation() {
+  const spot = document.getElementById('content')!;
+
+  spot.innerHTML = `<p class="h5 mx-2">Aguarde, carregando dados do servidor...</p>`;
+
   await apiGet()
     .then((data) => {
       saveToSessionStorage('clients', data.data);
+
+      spot.innerHTML = '';
     })
     .catch(() => {
       alert('Erro inesperado ao obter os dados do servidor!');
     });
-
-  const spot = document.getElementById('content')!;
-
-  spot.innerHTML = '';
 
   let line = `
     <div class="input-group m-0 mb-2 px-2">

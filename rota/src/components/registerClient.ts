@@ -1,15 +1,25 @@
-import { apiPost } from '../service/api.service';
+import { apiGet, apiPost } from '../service/api.service';
 import { getCep } from '../service/cep.service';
 import { Client } from '../types/Client';
 import { getPosition } from '../utils/getLocation';
-import { getSessionStorageData, getStorageData, saveToStorage } from '../utils/handleStorage';
+import { getSessionStorageData, getStorageData, saveToSessionStorage, saveToStorage } from '../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharPhone } from '../utils/removeInvalidChar';
 
-export function registerClient() {
+export async function registerClient() {
   const spot = document.getElementById('content')!;
   getPosition();
 
-  spot.innerHTML = '';
+  spot.innerHTML = `<p class="h5 mx-2">Aguarde, carregando dados do servidor...</p>`;
+
+  await apiGet()
+    .then((data) => {
+      saveToSessionStorage('clients', data.data);
+
+      spot.innerHTML = '';
+    })
+    .catch(() => {
+      alert('Erro de comunicação com o servidor');
+    });
 
   let line = `
       <div class="input-group m-0 mb-2 px-2">
@@ -191,18 +201,15 @@ export function registerClient() {
   const cpfIpt = <HTMLInputElement>document.getElementById('cpfIpt')!;
   const razaoIpt = <HTMLInputElement>document.getElementById('razaoIpt')!;
   const fantasiaIpt = <HTMLInputElement>document.getElementById('fantasiaIpt')!;
-
   const cepIpt = <HTMLInputElement>document.getElementById('cepIpt')!;
   const enderecoIpt = <HTMLInputElement>document.getElementById('enderecoIpt')!;
   const bairroIpt = <HTMLInputElement>document.getElementById('bairroIpt')!;
   const cidadeIpt = <HTMLInputElement>document.getElementById('cidadeIpt')!;
   const estadoIpt = <HTMLInputElement>document.getElementById('estadoIpt')!;
   const numeroIpt = <HTMLInputElement>document.getElementById('numeroIpt')!;
-
   const telClienteIpt = <HTMLInputElement>document.getElementById('telClienteIpt')!;
   const vendedorIpt = <HTMLInputElement>document.getElementById('vendedorIpt')!;
   const telVendedorIpt = <HTMLInputElement>document.getElementById('telVendedorIpt')!;
-
   const latitudeIpt = <HTMLInputElement>document.getElementById('latitudeIpt')!;
   const longitudeIpt = <HTMLInputElement>document.getElementById('longitudeIpt')!;
 
@@ -246,23 +253,58 @@ export function registerClient() {
   const saveClientBtn = document.getElementById('saveClient')!;
 
   saveClientBtn.addEventListener('click', async () => {
+    const clients: Client[] = getSessionStorageData('clients');
+
+    const cnpj = removeInvalidChar(cnpjIpt.value);
+    const cpf = removeInvalidChar(cpfIpt.value);
+    const razao = removeInvalidChar(razaoIpt.value);
+    const fantasia = removeInvalidChar(fantasiaIpt.value);
+    const telCliente = removeInvalidCharPhone(telClienteIpt.value);
+    const vendedor = removeInvalidChar(vendedorIpt.value);
+    const telVendedor = removeInvalidCharPhone(telVendedorIpt.value);
+    const endereco = removeInvalidChar(enderecoIpt.value);
+    const numero = removeInvalidChar(numeroIpt.value);
+    const bairro = removeInvalidChar(bairroIpt.value);
+    const cidade = removeInvalidChar(cidadeIpt.value);
+    const estado = removeInvalidChar(estadoIpt.value);
+    const cep = removeInvalidChar(cepIpt.value);
+
+    const latitude = Number(latitudeIpt.value);
+    const longitude = Number(longitudeIpt.value);
+
+    // validações
+
+    if (cnpj.length === 14) {
+      const cnpjFound = clients.find((item) => item.cnpj === cnpj);
+
+      if (cnpjFound) {
+        alert('CNPJ já cadastrado');
+
+        return;
+      }
+    } else if (cnpj.length > 14) {
+      alert('CNPJ inválido');
+
+      return;
+    }
+
     const newClient: Client = {
-      cnpj: removeInvalidChar(cnpjIpt.value),
-      cpf: removeInvalidChar(cpfIpt.value),
-      razao: removeInvalidChar(razaoIpt.value),
-      fantasia: removeInvalidChar(fantasiaIpt.value),
-      telCliente: removeInvalidCharPhone(telClienteIpt.value),
-      vendedor: removeInvalidChar(vendedorIpt.value),
-      telVendedor: removeInvalidCharPhone(telVendedorIpt.value),
-      endereco: removeInvalidChar(enderecoIpt.value),
-      numero: removeInvalidChar(numeroIpt.value),
-      bairro: removeInvalidChar(bairroIpt.value),
-      cidade: removeInvalidChar(cidadeIpt.value),
-      estado: removeInvalidChar(estadoIpt.value),
-      cep: removeInvalidChar(cepIpt.value),
+      cnpj,
+      cpf,
+      razao,
+      fantasia,
+      telCliente,
+      vendedor,
+      telVendedor,
+      endereco,
+      numero,
+      bairro,
+      cidade,
+      estado,
+      cep,
       atendido: true,
-      latitude: Number(latitudeIpt.value),
-      longitude: Number(longitudeIpt.value),
+      latitude,
+      longitude,
       diaSemana: 'sabado',
     };
 
