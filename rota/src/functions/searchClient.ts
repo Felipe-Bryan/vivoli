@@ -16,3 +16,17 @@ export async function searchClient(cnpj: string) {
     locationFound(clientFound);
   }
 }
+
+export async function searchClientCpf(cpf: string) {
+  const clients: Client[] = getSessionStorageData('clients');
+
+  const clientFound = clients.find((item) => item.cpf === cpf);
+
+  if (clientFound === undefined) {
+    locationNotFound();
+
+    return;
+  } else {
+    locationFound(clientFound);
+  }
+}

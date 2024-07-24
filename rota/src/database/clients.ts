@@ -18,5 +18,6 @@ export const clients: Client[] = [
     vendedor: 'Felipe',
     telCliente: '12982300213',
     telVendedor: '11946740747',
+    cpf: '',
   },
 ];

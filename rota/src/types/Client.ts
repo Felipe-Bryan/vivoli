@@ -1,5 +1,6 @@
 export interface Client {
   cnpj: string;
+  cpf: string;
   razao: string;
   fantasia: string;
   endereco: string;

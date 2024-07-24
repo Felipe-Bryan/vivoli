@@ -24,6 +24,17 @@ export function registerClient() {
       </div>
 
       <div class="input-group m-0 mb-2 px-2">
+        <span class="input-group-text w-25">CPF</span>
+        <input
+          type="text"
+          id="cpfIpt"
+          class="form-control"
+          placeholder="CPF"
+          aria-label="CPF"
+          aria-describedby="basic-addon1" />
+      </div>
+
+      <div class="input-group m-0 mb-2 px-2">
         <span class="input-group-text w-25">Razão</span>
         <input
           type="text"
@@ -177,6 +188,7 @@ export function registerClient() {
   spot.innerHTML = line;
 
   const cnpjIpt = <HTMLInputElement>document.getElementById('cnpjIpt')!;
+  const cpfIpt = <HTMLInputElement>document.getElementById('cpfIpt')!;
   const razaoIpt = <HTMLInputElement>document.getElementById('razaoIpt')!;
   const fantasiaIpt = <HTMLInputElement>document.getElementById('fantasiaIpt')!;
 
@@ -236,6 +248,7 @@ export function registerClient() {
   saveClientBtn.addEventListener('click', async () => {
     const newClient: Client = {
       cnpj: removeInvalidChar(cnpjIpt.value),
+      cpf: removeInvalidChar(cpfIpt.value),
       razao: removeInvalidChar(razaoIpt.value),
       fantasia: removeInvalidChar(fantasiaIpt.value),
       telCliente: removeInvalidCharPhone(telClienteIpt.value),
@@ -250,7 +263,7 @@ export function registerClient() {
       atendido: true,
       latitude: Number(latitudeIpt.value),
       longitude: Number(longitudeIpt.value),
-      diaSemana: 'Sábado',
+      diaSemana: 'sabado',
     };
 
     saveToStorage('vendedor', newClient.vendedor);
