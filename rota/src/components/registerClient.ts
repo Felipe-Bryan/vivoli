@@ -1,8 +1,11 @@
+import { validateNewClient } from '../functions/validateNewClient';
 import { apiGet, apiPost } from '../service/api.service';
 import { getCep } from '../service/cep.service';
 import { Client } from '../types/Client';
+import { RegisterClientInputs } from '../types/RegisterClientInputs';
 import { getPosition } from '../utils/getLocation';
 import { getSessionStorageData, getStorageData, saveToSessionStorage, saveToStorage } from '../utils/handleStorage';
+import { invalidateInput } from '../utils/invalidateInput';
 import { removeInvalidChar, removeInvalidCharPhone } from '../utils/removeInvalidChar';
 
 export async function registerClient() {
@@ -197,32 +200,34 @@ export async function registerClient() {
 
   spot.innerHTML = line;
 
-  const cnpjIpt = <HTMLInputElement>document.getElementById('cnpjIpt')!;
-  const cpfIpt = <HTMLInputElement>document.getElementById('cpfIpt')!;
-  const razaoIpt = <HTMLInputElement>document.getElementById('razaoIpt')!;
-  const fantasiaIpt = <HTMLInputElement>document.getElementById('fantasiaIpt')!;
-  const cepIpt = <HTMLInputElement>document.getElementById('cepIpt')!;
-  const enderecoIpt = <HTMLInputElement>document.getElementById('enderecoIpt')!;
-  const bairroIpt = <HTMLInputElement>document.getElementById('bairroIpt')!;
-  const cidadeIpt = <HTMLInputElement>document.getElementById('cidadeIpt')!;
-  const estadoIpt = <HTMLInputElement>document.getElementById('estadoIpt')!;
-  const numeroIpt = <HTMLInputElement>document.getElementById('numeroIpt')!;
-  const telClienteIpt = <HTMLInputElement>document.getElementById('telClienteIpt')!;
-  const vendedorIpt = <HTMLInputElement>document.getElementById('vendedorIpt')!;
-  const telVendedorIpt = <HTMLInputElement>document.getElementById('telVendedorIpt')!;
-  const latitudeIpt = <HTMLInputElement>document.getElementById('latitudeIpt')!;
-  const longitudeIpt = <HTMLInputElement>document.getElementById('longitudeIpt')!;
+  const inputs: RegisterClientInputs = {
+    cnpj: <HTMLInputElement>document.getElementById('cnpjIpt')!,
+    cpf: <HTMLInputElement>document.getElementById('cpfIpt')!,
+    razao: <HTMLInputElement>document.getElementById('razaoIpt')!,
+    fantasia: <HTMLInputElement>document.getElementById('fantasiaIpt')!,
+    cep: <HTMLInputElement>document.getElementById('cepIpt')!,
+    endereco: <HTMLInputElement>document.getElementById('enderecoIpt')!,
+    bairro: <HTMLInputElement>document.getElementById('bairroIpt')!,
+    cidade: <HTMLInputElement>document.getElementById('cidadeIpt')!,
+    estado: <HTMLInputElement>document.getElementById('estadoIpt')!,
+    numero: <HTMLInputElement>document.getElementById('numeroIpt')!,
+    telCliente: <HTMLInputElement>document.getElementById('telClienteIpt')!,
+    vendedor: <HTMLInputElement>document.getElementById('vendedorIpt')!,
+    telVendedor: <HTMLInputElement>document.getElementById('telVendedorIpt')!,
+    latitude: <HTMLInputElement>document.getElementById('latitudeIpt')!,
+    longitude: <HTMLInputElement>document.getElementById('longitudeIpt')!,
+  };
 
-  cepIpt.addEventListener('change', async () => {
-    const cep = removeInvalidChar(cepIpt.value);
+  inputs.cep.addEventListener('change', async () => {
+    const cep = removeInvalidChar(inputs.cep.value);
 
     await getCep(cep)
       .then((data: any) => {
         if (data) {
-          enderecoIpt.value = data.street;
-          bairroIpt.value = data.district;
-          cidadeIpt.value = data.city;
-          estadoIpt.value = data.stateShortname;
+          inputs.endereco.value = data.street;
+          inputs.bairro.value = data.district;
+          inputs.cidade.value = data.city;
+          inputs.estado.value = data.stateShortname;
         }
       })
       .catch(() => {
@@ -233,21 +238,21 @@ export async function registerClient() {
   const vendedor = getStorageData('vendedor');
 
   if (vendedor !== null) {
-    vendedorIpt.value = vendedor;
+    inputs.vendedor.value = vendedor;
   }
 
   const telVendedor = getStorageData('telVendedor');
 
   if (telVendedor !== null) {
-    telVendedorIpt.value = telVendedor;
+    inputs.telVendedor.value = telVendedor;
   }
 
   setTimeout(() => {
     const latitude = getSessionStorageData('latitude');
     const longitude = getSessionStorageData('longitude');
 
-    latitudeIpt.value = latitude;
-    longitudeIpt.value = longitude;
+    inputs.latitude.value = latitude;
+    inputs.longitude.value = longitude;
   }, 700);
 
   const saveClientBtn = document.getElementById('saveClient')!;
@@ -255,37 +260,29 @@ export async function registerClient() {
   saveClientBtn.addEventListener('click', async () => {
     const clients: Client[] = getSessionStorageData('clients');
 
-    const cnpj = removeInvalidChar(cnpjIpt.value);
-    const cpf = removeInvalidChar(cpfIpt.value);
-    const razao = removeInvalidChar(razaoIpt.value);
-    const fantasia = removeInvalidChar(fantasiaIpt.value);
-    const telCliente = removeInvalidCharPhone(telClienteIpt.value);
-    const vendedor = removeInvalidChar(vendedorIpt.value);
-    const telVendedor = removeInvalidCharPhone(telVendedorIpt.value);
-    const endereco = removeInvalidChar(enderecoIpt.value);
-    const numero = removeInvalidChar(numeroIpt.value);
-    const bairro = removeInvalidChar(bairroIpt.value);
-    const cidade = removeInvalidChar(cidadeIpt.value);
-    const estado = removeInvalidChar(estadoIpt.value);
-    const cep = removeInvalidChar(cepIpt.value);
+    let cnpj = removeInvalidChar(inputs.cnpj.value);
+    let cpf = removeInvalidChar(inputs.cpf.value);
+    const razao = removeInvalidChar(inputs.razao.value);
+    const fantasia = removeInvalidChar(inputs.fantasia.value);
+    const telCliente = removeInvalidCharPhone(inputs.telCliente.value);
+    const vendedor = removeInvalidChar(inputs.vendedor.value);
+    const telVendedor = removeInvalidCharPhone(inputs.telVendedor.value);
+    const endereco = removeInvalidChar(inputs.endereco.value);
+    const numero = removeInvalidChar(inputs.numero.value);
+    const bairro = removeInvalidChar(inputs.bairro.value);
+    const cidade = removeInvalidChar(inputs.cidade.value);
+    const estado = removeInvalidChar(inputs.estado.value);
+    const cep = removeInvalidChar(inputs.cep.value);
 
-    const latitude = Number(latitudeIpt.value);
-    const longitude = Number(longitudeIpt.value);
+    let latitude = Number(inputs.latitude.value);
+    let longitude = Number(inputs.longitude.value);
 
-    // validações
+    if (cnpj.length === 0) {
+      cnpj = cpf;
+    }
 
-    if (cnpj.length === 14) {
-      const cnpjFound = clients.find((item) => item.cnpj === cnpj);
-
-      if (cnpjFound) {
-        alert('CNPJ já cadastrado');
-
-        return;
-      }
-    } else if (cnpj.length > 14) {
-      alert('CNPJ inválido');
-
-      return;
+    if (cpf.length === 0) {
+      cpf = '-';
     }
 
     const newClient: Client = {
@@ -308,15 +305,23 @@ export async function registerClient() {
       diaSemana: 'sabado',
     };
 
+    const valid: boolean = validateNewClient(newClient, clients, inputs);
+
     saveToStorage('vendedor', newClient.vendedor);
     saveToStorage('telVendedor', newClient.telVendedor);
 
-    await apiPost(newClient)
-      .then(() => {
-        alert('Cliente salvo com sucesso!');
-      })
-      .catch(() => {
-        alert('Erro ao salvar cliente!');
-      });
+    if (valid === false) {
+      console.log('break');
+
+      return;
+    } else {
+      await apiPost(newClient)
+        .then(() => {
+          alert('Cliente salvo com sucesso!');
+        })
+        .catch(() => {
+          alert('Erro ao salvar cliente!');
+        });
+    }
   });
 }
