@@ -5,7 +5,6 @@ import { Client } from '../types/Client';
 import { RegisterClientInputs } from '../types/RegisterClientInputs';
 import { getPosition } from '../utils/getLocation';
 import { getSessionStorageData, getStorageData, saveToSessionStorage, saveToStorage } from '../utils/handleStorage';
-import { invalidateInput } from '../utils/invalidateInput';
 import { removeInvalidChar, removeInvalidCharPhone } from '../utils/removeInvalidChar';
 
 export async function registerClient() {
