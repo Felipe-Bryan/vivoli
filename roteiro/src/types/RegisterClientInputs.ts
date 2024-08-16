@@ -4,7 +4,7 @@ export interface RegisterClientInputs {
   rg: HTMLInputElement;
   nascimento: HTMLInputElement;
   email: HTMLInputElement;
-  telCliente: HTMLInputElement;
+  tel: HTMLInputElement;
 
   cnpj: HTMLInputElement;
   ie: HTMLInputElement;

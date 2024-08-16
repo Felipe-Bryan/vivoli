@@ -1,155 +1,100 @@
 import { Client } from '../types/Client';
+import { Vendedor } from '../types/Vendedor';
+import { getSessionStorageData } from '../utils/handleStorage';
 import { mapLinker } from '../utils/mapLinker';
+import { maskCep, maskPhone } from '../utils/masks';
+import { blockButton } from './blockButton';
+import { row } from './row';
+import { rowIcon } from './rowIcon';
 
 export function locationFound(client: Client) {
+  const vendedores: Vendedor[] = getSessionStorageData('vendedores');
+  const vendedor: Vendedor | undefined = vendedores.find((item) => item.setor === client.setor)!;
+
   const spot = document.getElementById('result')!;
 
   spot.innerHTML = '';
 
-  let line = `
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Razão</span>
-          <input
-            type="text"
-            id="razaoIpt"
-            class="form-control"
-            placeholder="Razão Social"
-            aria-label="Razão Social"
-            value="${client.razao}"
-            disabled />
-        </div>
+  let line = row({
+    title: 'Razão',
+    value: client.razao,
+  });
 
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Endereço</span>
-          <input
-            type="text"
-            id="enderecoIpt"
-            class="form-control"
-            placeholder="Endereço"
-            aria-label="Endereço"
-            value="${client.endereco}"
-            disabled />
-        </div>
-  
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Número</span>
-          <input
-            type="text"
-            id="numeroIpt"
-            class="form-control"
-            placeholder="Número"
-            aria-label="Número"
-            value="${client.numero}"
-            disabled />
-        </div>
+  line += row({
+    title: 'Endereço',
+    value: client.endereco,
+  });
 
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Bairro</span>
-          <input
-            type="text"
-            id="bairroIpt"
-            class="form-control"
-            placeholder="Bairro"
-            aria-label="Bairro"
-            value="${client.bairro}"
-            disabled />
-        </div>
-  
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Cidade</span>
-          <input
-            type="text"
-            id="cidadeIpt"
-            class="form-control"
-            placeholder="Cidade"
-            aria-label="Cidade"
-            value="${client.cidade}"
-            disabled />
-        </div>
+  line += row({
+    title: 'Número',
+    value: client.numero,
+  });
 
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Estado</span>
-          <input
-            type="text"
-            id="estadoIpt"
-            class="form-control"
-            placeholder="Estado"
-            aria-label="Estado"
-            value="${client.estado}"
-            disabled />
-        </div>        
-  
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">CEP</span>
-          <input 
-              type="text" 
-              id="cepIpt"
-              class="form-control" 
-              placeholder="CEP" 
-              aria-label="CEP" 
-              value="${client.cep}"
-              disabled />
-        </div>
+  line += row({
+    title: 'Cidade',
+    value: client.cidade,
+  });
 
-        <div class="d-flex justify-content-end m-2">
-          <button type="button" class="btn btn-secondary" id="toMap">Ver no mapa <i class="bi bi-geo-alt-fill"></i></button>
-        </div>
+  line += row({
+    title: 'Bairro',
+    value: client.bairro,
+  });
 
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Vendedor</span>
-          <input 
-              type="text" 
-              id="vendedorIpt"
-              class="form-control" 
-              placeholder="Vendedor" 
-              aria-label="Vendedor" 
-              value="${client.vendedor}"
-              disabled />
-        </div>
-        
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Tel Vendedor</span>
-          <input 
-              type="text"
-              id="telVendedorIpt"
-              class="form-control" 
-              placeholder="Tel Vendedor" 
-              aria-label="Tel Vendedor" 
-              value="${client.telVendedor}"
-              disabled />
-          <span class="input-group-text" id="callVendedor"><i class="bi bi-whatsapp text-success"></i></span>          
-        </div>
-        
-        <div class="input-group m-0 mb-2 px-2">
-          <span class="input-group-text w-25">Tel Cliente</span>          
-          <input 
-              type="text"
-              id="telClienteIpt"
-              class="form-control" 
-              placeholder="Tel Cliente" 
-              aria-label="Tel Cliente" 
-              value="${client.telCliente}"
-              disabled />
-          <span class="input-group-text" id="callClient"><i class="bi bi-whatsapp text-success"></i></span>
-        </div>`;
+  line += row({
+    title: 'CEP',
+    value: maskCep(client.cep),
+  });
+
+  line += row({
+    title: 'Estado',
+    value: client.estado,
+  });
+
+  line += blockButton({
+    id: 'openMap',
+    title: 'Abrir Mapa',
+    type: 'info',
+  });
+
+  line += row({
+    title: 'Vendedor',
+    value: vendedor.nome,
+  });
+
+  line += rowIcon({
+    title: 'Tel',
+    value: maskPhone(vendedor.tel),
+    icon: '<i class="bi bi-whatsapp text-success" id="telVendedor"></i>',
+  });
+
+  line += row({
+    title: 'Cliente',
+    value: client.nome,
+  });
+
+  line += rowIcon({
+    title: 'Tel',
+    value: maskPhone(client.tel),
+    icon: '<i class="bi bi-whatsapp text-success" id="telCliente"></i>',
+  });
 
   spot.innerHTML = line;
 
-  const toMapBtn = document.getElementById('toMap')!;
+  const openMapBtn = document.getElementById('openMap')!;
 
-  toMapBtn.addEventListener('click', () => {
+  openMapBtn.addEventListener('click', () => {
     window.open(mapLinker(client), '_blank');
   });
 
-  const callVendedorBtn = document.getElementById('callVendedor')!;
+  const telVendedorBtn = document.getElementById('telVendedor')!;
 
-  callVendedorBtn.addEventListener('click', () => {
-    window.open(`https://wa.me/55${client.telVendedor}`, '_blank');
+  telVendedorBtn.addEventListener('click', () => {
+    window.open(`https://wa.me/55${vendedor.tel}`, '_blank');
   });
 
-  const callClientBtn = document.getElementById('callClient')!;
+  const telClienteBtn = document.getElementById('telCliente')!;
 
-  callClientBtn.addEventListener('click', () => {
-    window.open(`https://wa.me/55${client.telCliente}`, '_blank');
+  telClienteBtn.addEventListener('click', () => {
+    window.open(`https://wa.me/55${client.tel}`, '_blank');
   });
 }

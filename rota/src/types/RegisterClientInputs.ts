@@ -1,17 +1,29 @@
 export interface RegisterClientInputs {
-  cnpj: HTMLInputElement;
+  nome: HTMLInputElement;
   cpf: HTMLInputElement;
+  rg: HTMLInputElement;
+  nascimento: HTMLInputElement;
+  email: HTMLInputElement;
+  tel: HTMLInputElement;
+
+  cnpj: HTMLInputElement;
+  ie: HTMLInputElement;
   razao: HTMLInputElement;
   fantasia: HTMLInputElement;
-  telCliente: HTMLInputElement;
-  vendedor: HTMLInputElement;
-  telVendedor: HTMLInputElement;
+
+  cep: HTMLInputElement;
   endereco: HTMLInputElement;
   numero: HTMLInputElement;
   bairro: HTMLInputElement;
   cidade: HTMLInputElement;
   estado: HTMLInputElement;
-  cep: HTMLInputElement;
+
+  setor: HTMLSelectElement;
+
+  diaSemana: HTMLSelectElement;
+  frequencia: HTMLSelectElement;
+  sequencia: HTMLInputElement;
+
   latitude: HTMLInputElement;
   longitude: HTMLInputElement;
 }

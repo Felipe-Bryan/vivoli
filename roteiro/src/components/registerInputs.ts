@@ -18,6 +18,9 @@ const frequencia: SelectOptionItem[] = [
 ];
 
 const setores: SelectOptionItem[] = [
+  { value: '38', text: 'Setor 38' },
+  { value: '47', text: 'Setor 47' },
+  { value: '51', text: 'Setor 51' },
   { value: '55', text: 'Setor 55' },
   { value: '60', text: 'Setor 60' },
 ];
@@ -52,7 +55,7 @@ export function register() {
 
   line += inputGroup({
     type: 'text',
-    title: 'Tel Cliente',
+    title: 'Tel',
   });
 
   line += inputGroup({
@@ -121,11 +124,6 @@ export function register() {
     id: 'frequencia-ipt',
     title: 'Frequência',
     options: frequencia,
-  });
-
-  line += inputGroup({
-    type: 'number',
-    title: 'Sequência',
   });
 
   line += inputGroup({

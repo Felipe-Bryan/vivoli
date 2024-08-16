@@ -24,7 +24,7 @@ export async function registerClient() {
     rg: <HTMLInputElement>document.getElementById('rg-ipt')!,
     nascimento: <HTMLInputElement>document.getElementById('nascimento-ipt')!,
     email: <HTMLInputElement>document.getElementById('email-ipt')!,
-    telCliente: <HTMLInputElement>document.getElementById('telcliente-ipt')!,
+    tel: <HTMLInputElement>document.getElementById('tel-ipt')!,
 
     cnpj: <HTMLInputElement>document.getElementById('cnpj-ipt')!,
     ie: <HTMLInputElement>document.getElementById('ie-ipt')!,
@@ -83,7 +83,7 @@ export async function registerClient() {
     const rg = removeInvalidChar(inputs.rg.value);
     const nascimento = removeInvalidChar(inputs.nascimento.value);
     const email = removeInvalidChar(inputs.email.value);
-    const telCliente = removeInvalidCharPhone(inputs.telCliente.value);
+    const tel = removeInvalidCharPhone(inputs.tel.value);
 
     let cnpj = removeInvalidChar(inputs.cnpj.value);
     const ie = removeInvalidChar(inputs.ie.value);
@@ -100,7 +100,6 @@ export async function registerClient() {
 
     const diaSemana = inputs.diaSemana.value;
     const frequencia = inputs.frequencia.value;
-    const sequencia = Number(inputs.sequencia.value); // <----------------------
 
     let latitude = Number(inputs.latitude.value);
     let longitude = Number(inputs.longitude.value);
@@ -119,43 +118,41 @@ export async function registerClient() {
       rg,
       nascimento,
       email,
-      telCliente,
-
+      tel,
+      latitude,
+      longitude,
       cnpj,
       ie,
       razao,
       fantasia,
-
       cep,
       endereco,
       numero,
       bairro,
       cidade,
       estado,
-
       setor,
       ativo: true,
       bloqueado: false,
-
       atendido: true,
       diaSemana,
       frequencia,
-      sequencia,
-
-      latitude,
-      longitude,
+      sequencia: 0, // Temp
+      // sequencia: clients.length + 1,
     };
 
-    const valid: boolean = validateNewClient(newClient, clients, inputs);
+    let valid: boolean = validateNewClient(newClient, clients, inputs);
 
     if (valid === false) {
-      alert('Erro ao cadastrar cliente!');
-
       return;
     } else {
       await apiPost(newClient)
         .then(() => {
           alert('Cliente salvo com sucesso!');
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         })
         .catch(() => {
           alert('Erro ao salvar cliente!');

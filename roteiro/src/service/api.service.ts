@@ -8,7 +8,7 @@ const api = axios.create({
 export async function apiPost(client: Client) {
   let result: any;
 
-  await api.post('vivoli', client).then((data) => {
+  await api.post('vivoli/client', client).then((data) => {
     result = data.data;
   });
 

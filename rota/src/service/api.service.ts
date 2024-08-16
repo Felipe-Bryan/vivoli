@@ -8,17 +8,17 @@ const api = axios.create({
 export async function apiPost(client: Client) {
   let result: any;
 
-  await api.post('vivoli', client).then((data) => {
+  await api.post('vivoli/client', client).then((data) => {
     result = data.data;
   });
 
   return result;
 }
 
-export async function apiGet() {
+export async function apiGet(route: string) {
   let result: any;
 
-  await api.get('vivoli').then((data) => {
+  await api.get(`vivoli/${route}`).then((data) => {
     result = data.data;
   });
 

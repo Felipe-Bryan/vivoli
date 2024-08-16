@@ -1,18 +1,17 @@
-import { registerClient } from './components/registerClient';
-import { searchLocation } from './components/searchLocation';
+import { initSearch } from './functions/initSearch';
+import { apiGet } from './service/api.service';
+import { saveToSessionStorage } from './utils/handleStorage';
 
-const searchBtn = document.getElementById('search');
+Promise.all([
+  apiGet('client').then((data) => saveToSessionStorage('clients', data.data)),
 
-if (searchBtn) {
-  searchBtn.addEventListener('click', () => {
-    searchLocation();
+  apiGet('vendedor').then((data) => saveToSessionStorage('vendedores', data.data)),
+
+  apiGet('setor').then((data) => saveToSessionStorage('setores', data.data)),
+])
+  .then(() => {
+    initSearch();
+  })
+  .catch(() => {
+    alert('Erro inesperado ao obter os dados do servidor!');
   });
-}
-
-const registerBtn = document.getElementById('register');
-
-if (registerBtn) {
-  registerBtn.addEventListener('click', () => {
-    registerClient();
-  });
-}

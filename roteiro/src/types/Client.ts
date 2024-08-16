@@ -4,7 +4,7 @@ export interface Client {
   rg: string;
   nascimento: string;
   email: string;
-  telCliente: string;
+  tel: string;
 
   cnpj: string;
   ie: string;
