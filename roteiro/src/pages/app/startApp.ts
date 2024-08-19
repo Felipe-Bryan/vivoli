@@ -1,7 +1,7 @@
 import { mainComponent } from '../../components/mainComponent';
+import { logout } from '../../functions/logout';
 import { apiGet } from '../../service/api.service';
 import { Vendedor } from '../../types/Vendedor';
-import { componentVisibility } from '../../utils/componentVisibility';
 import { getStorageData, saveToSessionStorage } from '../../utils/handleStorage';
 import { setButton } from '../../utils/setButton';
 import { registerClient } from '../register/registerClient';
@@ -21,6 +21,7 @@ export async function startApp() {
 
       setButton('home', () => startApp());
       setButton('newClient', () => registerClient());
+      setButton('logout', () => logout());
     })
     .catch(() => {
       alert('Erro de comunicação com o servidor');

@@ -16,7 +16,8 @@ export function mainComponent() {
         <ul class="dropdown-menu">
         <li id="home"><p class="m-0 p-0 mx-1">Início</p></li>
         <li id="newClient"><p class="m-0 p-0 mx-1">Cadastrar cliente</p></li>
-        <li><p class="m-0 p-0 mx-1">Item</p></li>
+        <li id="manageClient"><p class="m-0 p-0 mx-1">Gerenciar clientes</p></li>
+        <li id="logout"><p class="m-0 p-0 mx-1">Logout</p></li>
         </ul>
     </div>
     </div>

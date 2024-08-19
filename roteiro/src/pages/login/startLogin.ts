@@ -40,8 +40,6 @@ export function startLogin() {
         .then((data) => {
           const logged = { ...data.data, date: `${new Date().getDate()}/${new Date().getMonth() + 1}` };
 
-          console.log(logged);
-
           saveToStorage('user', logged);
 
           startApp();
