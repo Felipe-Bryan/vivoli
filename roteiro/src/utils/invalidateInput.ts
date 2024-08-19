@@ -1,4 +1,4 @@
-export function invalidateInput(input: HTMLInputElement) {
+export function invalidateInput(input: HTMLInputElement | HTMLSelectElement) {
   input.classList.add('is-invalid');
 
   input.focus();

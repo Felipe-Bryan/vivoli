@@ -132,6 +132,34 @@ export function removeInvalidCharPhone(value: string) {
   return string;
 }
 
+export function removeInvalidCharCep(value: string) {
+  let string = value
+    .toLowerCase()
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace('-', '')
+    .replace('-', '')
+    .replace('-', '')
+    .replace('.', '')
+    .replace('.', '')
+    .replace('.', '')
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace('-', '')
+    .replace('-', '')
+    .replace('-', '')
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace(' ', '')
+    .replace('-', '')
+    .replace('-', '')
+    .replace('-', '');
+
+  return string;
+}
+
 export function inputIdGenerate(value: string) {
   let string = value
     .toLowerCase()

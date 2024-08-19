@@ -68,11 +68,54 @@ export function validateNewClient(client: Client, clients: Client[], inputs: Reg
     invalidateInput(inputs.estado);
 
     return false;
+  } else if (client.estado.length === 1) {
+    alert('Estado inválido!');
+
+    invalidateInput(inputs.estado);
+
+    return false;
   }
 
-  client.latitude = getSessionStorageData('latitude');
+  if (client.setor === '0') {
+    alert('Selecione o setor!');
 
-  client.longitude = getSessionStorageData('longitude');
+    invalidateInput(inputs.setor);
+
+    return false;
+  }
+
+  if (client.diaSemana === '0') {
+    alert('Selecione o dia do atendimento!');
+
+    invalidateInput(inputs.diaSemana);
+
+    return false;
+  }
+
+  if (client.frequencia === '0') {
+    alert('Selecione a frequência!');
+
+    invalidateInput(inputs.frequencia);
+
+    return false;
+  }
+
+  let latitude = getSessionStorageData('latitude');
+  let longitude = getSessionStorageData('longitude');
+
+  if (!latitude) {
+    const confirmation = confirm('Não foi possível obter a localização!\nCadastrar cliente sem a localização?');
+
+    if (!confirmation) {
+      return false;
+    } else {
+      latitude = 0;
+      longitude = 0;
+    }
+  }
+
+  client.latitude = latitude;
+  client.longitude = longitude;
 
   return true;
 }
@@ -144,6 +187,14 @@ function checkClientInfo(client: Client, inputs: RegisterClientInputs) {
 
   if (client.nascimento.length === 0) {
     alert('Informe a data de nascimento do cliente!');
+
+    invalidateInput(inputs.nascimento);
+
+    return false;
+  }
+
+  if (client.nascimento.length !== 8) {
+    alert('Informe a data de nascimento no formato: DDMMAAAA, apenas números');
 
     invalidateInput(inputs.nascimento);
 

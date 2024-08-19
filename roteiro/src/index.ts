@@ -1,3 +1,3 @@
-import { startApp } from './pages/app/startApp';
+import { startLogin } from './pages/login/startLogin';
 
-startApp();
+startLogin();

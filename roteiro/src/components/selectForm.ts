@@ -2,7 +2,7 @@ export function selectForm(selectItem: SelectItem) {
   let result = `
 <div class="m-0 mb-2 px-2">
     <select class="form-select m-0" id="${selectItem.id}">
-        <option selected disabled>${selectItem.title}</option>`;
+        <option selected disabled value="0">${selectItem.title}</option>`;
 
   selectItem.options.forEach((option) => {
     result += selectOption(option);

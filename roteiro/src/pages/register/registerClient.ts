@@ -4,7 +4,7 @@ import { getCep } from '../../service/cep.service';
 import { Client } from '../../types/Client';
 import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
-import { removeInvalidChar, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
+import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
 import { defineRoot } from '../../utils/defineRoot';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
 import { validateNewClient } from '../../functions/validateNewClient';
@@ -14,9 +14,7 @@ export async function registerClient() {
 
   getLocation();
 
-  let line = register();
-
-  spot.innerHTML = line;
+  spot.innerHTML = register();
 
   const inputs: RegisterClientInputs = {
     nome: <HTMLInputElement>document.getElementById('nome-ipt')!,
@@ -78,11 +76,11 @@ export async function registerClient() {
   saveClientBtn.addEventListener('click', async () => {
     const clients: Client[] = getSessionStorageData('clients');
 
-    const nome = removeInvalidChar(inputs.nome.value);
+    const nome = inputs.nome.value;
     let cpf = removeInvalidChar(inputs.cpf.value);
     const rg = removeInvalidChar(inputs.rg.value);
     const nascimento = removeInvalidChar(inputs.nascimento.value);
-    const email = removeInvalidChar(inputs.email.value);
+    const email = inputs.email.value;
     const tel = removeInvalidCharPhone(inputs.tel.value);
 
     let cnpj = removeInvalidChar(inputs.cnpj.value);
@@ -90,7 +88,7 @@ export async function registerClient() {
     const razao = removeInvalidChar(inputs.razao.value);
     const fantasia = removeInvalidChar(inputs.fantasia.value);
 
-    const cep = removeInvalidChar(inputs.cep.value);
+    const cep = removeInvalidCharCep(inputs.cep.value);
     const endereco = removeInvalidChar(inputs.endereco.value);
     const numero = removeInvalidChar(inputs.numero.value);
     const bairro = removeInvalidChar(inputs.bairro.value);
@@ -103,14 +101,6 @@ export async function registerClient() {
 
     let latitude = Number(inputs.latitude.value);
     let longitude = Number(inputs.longitude.value);
-
-    if (cnpj.length === 0) {
-      cnpj = cpf;
-    }
-
-    if (cpf.length === 0) {
-      cpf = '-';
-    }
 
     const newClient: Client = {
       nome,
@@ -137,8 +127,7 @@ export async function registerClient() {
       atendido: true,
       diaSemana,
       frequencia,
-      sequencia: 0, // Temp
-      // sequencia: clients.length + 1,
+      sequencia: clients.length + 1,
     };
 
     let valid: boolean = validateNewClient(newClient, clients, inputs);
@@ -146,16 +135,16 @@ export async function registerClient() {
     if (valid === false) {
       return;
     } else {
-      await apiPost(newClient)
+      await apiPost(`client`, newClient)
         .then(() => {
           alert('Cliente salvo com sucesso!');
 
           setTimeout(() => {
-            window.location.reload();
+            registerClient();
           }, 3000);
         })
         .catch(() => {
-          alert('Erro ao salvar cliente!');
+          alert('Erro ao salvar cliente!\nRecarregue a página e tente novamente.');
         });
     }
   });

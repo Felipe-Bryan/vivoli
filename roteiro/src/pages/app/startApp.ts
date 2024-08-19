@@ -1,34 +1,28 @@
+import { mainComponent } from '../../components/mainComponent';
 import { apiGet } from '../../service/api.service';
+import { Vendedor } from '../../types/Vendedor';
 import { componentVisibility } from '../../utils/componentVisibility';
-import { defineRoot } from '../../utils/defineRoot';
-import { saveToSessionStorage } from '../../utils/handleStorage';
+import { getStorageData, saveToSessionStorage } from '../../utils/handleStorage';
 import { setButton } from '../../utils/setButton';
 import { registerClient } from '../register/registerClient';
 
 export async function startApp() {
-  const root = defineRoot();
+  const root = document.getElementById('root')!;
 
   root.innerHTML = `<p class="h5 mx-2">Aguarde, carregando dados do servidor...</p>`;
 
-  // await apiGet()
-  //   .then((data) => {
-  //     saveToSessionStorage('clients', data.data);
+  const user: Vendedor = getStorageData('user');
 
-  //     componentVisibility('menuBtn', 'show');
+  await apiGet(`client/setor/${user.setor}`)
+    .then((data) => {
+      saveToSessionStorage('clients', data.data);
 
-  //     setButton('home', () => startApp());
-  //     setButton('newClient', () => registerClient());
+      root.innerHTML = mainComponent();
 
-  //     root.innerHTML = '';
-  //   })
-  //   .catch(() => {
-  //     alert('Erro de comunicação com o servidor');
-  //   });
-
-  componentVisibility('menuBtn', 'show');
-
-  setButton('home', () => startApp());
-  setButton('newClient', () => registerClient());
-
-  root.innerHTML = '';
+      setButton('home', () => startApp());
+      setButton('newClient', () => registerClient());
+    })
+    .catch(() => {
+      alert('Erro de comunicação com o servidor');
+    });
 }
