@@ -1,31 +1,26 @@
+import { getSessionStorageData } from '../utils/handleStorage';
 import { blockButton } from './blockButton';
 import { inputGroup } from './inputGroup';
 import { selectForm, SelectOptionItem } from './selectForm';
 
-const diasSemana: SelectOptionItem[] = [
-  { value: 'Segunda', text: 'Segunda' },
-  { value: 'Terça', text: 'Terça' },
-  { value: 'Quarta', text: 'Quarta' },
-  { value: 'Quinta', text: 'Quinta' },
-  { value: 'Sexta', text: 'Sexta' },
-  { value: 'Sábado', text: 'Sábado' },
-];
-
-const frequencia: SelectOptionItem[] = [
-  { value: 'S', text: 'Semanal' },
-  { value: 'A', text: 'Quinzenal 1' },
-  { value: 'B', text: 'Quinzenal 2' },
-];
-
-const setores: SelectOptionItem[] = [
-  { value: '38', text: 'Setor 38' },
-  { value: '47', text: 'Setor 47' },
-  { value: '51', text: 'Setor 51' },
-  { value: '55', text: 'Setor 55' },
-  { value: '60', text: 'Setor 60' },
-];
-
 export function register() {
+  const diasSemana: SelectOptionItem[] = [
+    { value: 'Segunda', text: 'Segunda' },
+    { value: 'Terça', text: 'Terça' },
+    { value: 'Quarta', text: 'Quarta' },
+    { value: 'Quinta', text: 'Quinta' },
+    { value: 'Sexta', text: 'Sexta' },
+    { value: 'Sábado', text: 'Sábado' },
+  ];
+
+  const frequencia: SelectOptionItem[] = [
+    { value: 'S', text: 'Semanal' },
+    { value: 'A', text: 'Quinzenal 1' },
+    { value: 'B', text: 'Quinzenal 2' },
+  ];
+
+  const setores: SelectOptionItem[] = getSessionStorageData('setores');
+
   let line = ``;
 
   line += inputGroup({
@@ -34,17 +29,17 @@ export function register() {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CPF',
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'RG',
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Nascimento',
     placeholder: 'DD/MM/AAAA',
   });
@@ -55,17 +50,17 @@ export function register() {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Tel',
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CNPJ',
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'IE',
   });
 
@@ -79,8 +74,16 @@ export function register() {
     title: 'Fantasia',
   });
 
+  line += `
+<div class="input-group m-0 mb-2 px-2">
+  <span class="input-group-text" id="basic-addon1">Abre</span>
+  <input type="number" id="abre-ipt" class="form-control w-25" placeholder="00" />
+  <span class="input-group-text" id="basic-addon1">Fecha</span>
+  <input type="number" id="fecha-ipt" class="form-control w-25" placeholder="00" />
+</div>`;
+
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CEP',
   });
 
@@ -90,7 +93,7 @@ export function register() {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Número',
   });
 

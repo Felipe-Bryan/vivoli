@@ -1,17 +1,10 @@
 import { inputGroup } from '../../../components/inputGroup';
-import { selectForm, SelectOptionItem } from '../../../components/selectForm';
 
 export function manageComponent() {
-  const options: SelectOptionItem[] = [
-    { value: 'cidade', text: 'Cidade' },
-    { value: 'bairro', text: 'Bairro' },
-  ];
-
   let line = `
-<div class="container">
+<div class="container p-0">
     <div class="row">
-        <p class="col-2"></p>
-        <div class="col-10">`;
+        <div class="col-12">`;
 
   //   line += selectForm({
   //     id: 'filter',
@@ -22,6 +15,7 @@ export function manageComponent() {
   line += inputGroup({
     title: 'Pesquisar',
     type: 'text',
+    placeholder: 'CPF/CNPJ/Nome/Razão',
   });
 
   line += `

@@ -10,6 +10,8 @@ export interface RegisterClientInputs {
   ie: HTMLInputElement;
   razao: HTMLInputElement;
   fantasia: HTMLInputElement;
+  abre: HTMLInputElement;
+  fecha: HTMLInputElement;
 
   cep: HTMLInputElement;
   endereco: HTMLInputElement;

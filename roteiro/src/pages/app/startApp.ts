@@ -1,4 +1,5 @@
 import { mainComponent } from '../../components/mainComponent';
+import { SelectOptionItem } from '../../components/selectForm';
 import { logout } from '../../functions/logout';
 import { apiGet } from '../../service/api.service';
 import { Vendedor } from '../../types/Vendedor';
@@ -13,6 +14,27 @@ export async function startApp() {
   root.innerHTML = `<p class="h5 mx-2">Aguarde, carregando dados do servidor...</p>`;
 
   const user: Vendedor = getStorageData('user');
+
+  await apiGet(`setor`)
+    .then((data) => {
+      const result = data.data;
+
+      let setores: SelectOptionItem[] = [];
+
+      result.forEach((setor: any) => {
+        setores.push({
+          value: setor.nome,
+          text: `Setor ${setor.nome}`,
+        });
+      });
+
+      saveToSessionStorage('setores', setores);
+    })
+    .catch(() => {
+      const setores: SelectOptionItem[] = [{ value: user.setor, text: `Setor ${user.setor}` }];
+
+      saveToSessionStorage('setores', setores);
+    });
 
   await apiGet(`client/setor/${user.setor}`)
     .then((data) => {

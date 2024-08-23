@@ -8,6 +8,7 @@ import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from 
 import { defineRoot } from '../../utils/defineRoot';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
 import { validateNewClient } from '../../functions/validateNewClient';
+import { maskBirth } from '../../utils/masks';
 
 export async function registerClient() {
   const spot = defineRoot();
@@ -28,6 +29,8 @@ export async function registerClient() {
     ie: <HTMLInputElement>document.getElementById('ie-ipt')!,
     razao: <HTMLInputElement>document.getElementById('razao-ipt')!,
     fantasia: <HTMLInputElement>document.getElementById('fantasia-ipt')!,
+    abre: <HTMLInputElement>document.getElementById('abre-ipt')!,
+    fecha: <HTMLInputElement>document.getElementById('fecha-ipt')!,
 
     cep: <HTMLInputElement>document.getElementById('cep-ipt')!,
     endereco: <HTMLInputElement>document.getElementById('endereco-ipt')!,
@@ -80,13 +83,15 @@ export async function registerClient() {
     let cpf = removeInvalidChar(inputs.cpf.value);
     const rg = removeInvalidChar(inputs.rg.value);
     const nascimento = removeInvalidChar(inputs.nascimento.value);
-    const email = inputs.email.value;
+    const email = inputs.email.value.toLowerCase();
     const tel = removeInvalidCharPhone(inputs.tel.value);
 
     let cnpj = removeInvalidChar(inputs.cnpj.value);
     const ie = removeInvalidChar(inputs.ie.value);
     const razao = removeInvalidChar(inputs.razao.value);
     const fantasia = removeInvalidChar(inputs.fantasia.value);
+    const abre = removeInvalidChar(inputs.abre.value);
+    const fecha = removeInvalidChar(inputs.fecha.value);
 
     const cep = removeInvalidCharCep(inputs.cep.value);
     const endereco = removeInvalidChar(inputs.endereco.value);
@@ -115,6 +120,8 @@ export async function registerClient() {
       ie,
       razao,
       fantasia,
+      abre,
+      fecha,
       cep,
       endereco,
       numero,
@@ -135,6 +142,11 @@ export async function registerClient() {
     if (valid === false) {
       return;
     } else {
+      newClient.nascimento = maskBirth(newClient.nascimento);
+      newClient.latitude = getSessionStorageData('latitude');
+      newClient.longitude = getSessionStorageData('longitude');
+      newClient.razao = newClient.razao.toLowerCase();
+
       await apiPost(`client`, newClient)
         .then(() => {
           alert('Cliente salvo com sucesso!');

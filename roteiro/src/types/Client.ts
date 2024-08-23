@@ -11,6 +11,8 @@ export interface Client {
   ie: string;
   razao: string;
   fantasia: string;
+  abre: string;
+  fecha: string;
 
   cep: string;
   endereco: string;
