@@ -7,3 +7,17 @@ export function setButton(id: string, execute: () => any) {
     });
   }
 }
+
+export function setEventListener(
+  id: string,
+  event: 'click' | 'change' | 'keyup' | 'blur' | 'focus',
+  execute: () => any
+) {
+  const element = <HTMLElement>document.getElementById(id);
+
+  if (element) {
+    element.addEventListener(event, () => {
+      execute();
+    });
+  }
+}

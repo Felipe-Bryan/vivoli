@@ -4,6 +4,7 @@ import { apiGet } from '../../service/api.service';
 import { Vendedor } from '../../types/Vendedor';
 import { getStorageData, saveToSessionStorage } from '../../utils/handleStorage';
 import { setButton } from '../../utils/setButton';
+import { startManage } from '../manage/startManage';
 import { registerClient } from '../register/registerClient';
 
 export async function startApp() {
@@ -21,6 +22,7 @@ export async function startApp() {
 
       setButton('home', () => startApp());
       setButton('newClient', () => registerClient());
+      setButton('manageClient', () => startManage());
       setButton('logout', () => logout());
     })
     .catch(() => {

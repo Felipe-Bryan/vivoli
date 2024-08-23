@@ -21,3 +21,7 @@ export function maskBirth(number: string): string {
 
   return `${numero.slice(0, 2)}/${numero.slice(2, 4)}/${numero.slice(4)}`;
 }
+
+// export function maskCPF(number: string){
+//   if(number.length === 14){}
+// }
