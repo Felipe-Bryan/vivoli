@@ -36,6 +36,14 @@ export async function startApp() {
       saveToSessionStorage('setores', setores);
     });
 
+  await apiGet('ativo')
+    .then((data) => {
+      saveToSessionStorage('ativos', data.data);
+    })
+    .catch(() => {
+      alert('Não foi possível obter informação dos ativos!');
+    });
+
   await apiGet(`client/setor/${user.setor}`)
     .then((data) => {
       saveToSessionStorage('clients', data.data);

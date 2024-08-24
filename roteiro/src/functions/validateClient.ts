@@ -3,7 +3,7 @@ import { RegisterClientInputs } from '../types/RegisterClientInputs';
 import { getSessionStorageData } from '../utils/handleStorage';
 import { invalidateInput } from '../utils/invalidateInput';
 
-export function validateNewClient(client: Client, clients: Client[], inputs: RegisterClientInputs): boolean {
+export function validateClient(client: Client, clients: Client[], inputs: RegisterClientInputs): boolean {
   let valid = checkClientInfo(client, inputs);
 
   if (valid === false) {

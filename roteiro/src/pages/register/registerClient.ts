@@ -7,8 +7,7 @@ import { getSessionStorageData } from '../../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
 import { defineRoot } from '../../utils/defineRoot';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
-import { validateNewClient } from '../../functions/validateNewClient';
-import { maskBirth } from '../../utils/masks';
+import { validateClient } from '../../functions/validateClient';
 
 export async function registerClient() {
   const spot = defineRoot();
@@ -137,12 +136,11 @@ export async function registerClient() {
       sequencia: clients.length + 1,
     };
 
-    let valid: boolean = validateNewClient(newClient, clients, inputs);
+    let valid: boolean = validateClient(newClient, clients, inputs);
 
     if (valid === false) {
       return;
     } else {
-      newClient.nascimento = maskBirth(newClient.nascimento);
       newClient.latitude = getSessionStorageData('latitude');
       newClient.longitude = getSessionStorageData('longitude');
       newClient.razao = newClient.razao.toLowerCase();

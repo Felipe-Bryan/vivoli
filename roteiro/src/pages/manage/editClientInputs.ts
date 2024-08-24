@@ -2,6 +2,8 @@ import { blockButton } from '../../components/blockButton';
 import { inputGroup } from '../../components/inputGroup';
 import { SelectOptionItem, selectForm } from '../../components/selectForm';
 import { Client } from '../../types/Client';
+import { getSessionStorageData, saveToSessionStorage } from '../../utils/handleStorage';
+import { removeInvalidChar } from '../../utils/removeInvalidChar';
 
 export function editInputs(client: Client) {
   const diasSemana: SelectOptionItem[] = [
@@ -19,15 +21,14 @@ export function editInputs(client: Client) {
     { value: 'B', text: 'Quinzenal 2' },
   ];
 
-  const setores: SelectOptionItem[] = [
-    { value: '38', text: 'Setor 38' },
-    { value: '47', text: 'Setor 47' },
-    { value: '51', text: 'Setor 51' },
-    { value: '55', text: 'Setor 55' },
-    { value: '60', text: 'Setor 60' },
-  ];
+  const setores: SelectOptionItem[] = getSessionStorageData('setores');
 
-  let line = ``;
+  let line = `${blockButton(
+    `viewFreezer`,
+    `Ver Info Freezers`,
+    'secondary',
+    `data-bs-toggle="modal" data-bs-target="#modal2"`
+  )}`;
 
   line += inputGroup({
     type: 'text',
@@ -36,22 +37,22 @@ export function editInputs(client: Client) {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CPF',
     value: client.cpf,
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'RG',
     value: client.rg,
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Nascimento',
-    placeholder: 'DD/MM/AAAA',
-    value: client.nascimento,
+    placeholder: 'DDMMAAAA',
+    value: removeInvalidChar(client.nascimento),
   });
 
   line += inputGroup({
@@ -61,19 +62,19 @@ export function editInputs(client: Client) {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Tel',
     value: client.tel,
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CNPJ',
     value: client.cnpj,
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'IE',
     value: client.ie,
   });
@@ -90,8 +91,25 @@ export function editInputs(client: Client) {
     value: client.fantasia,
   });
 
+  line += `
+  <div class="input-group m-0 mb-2 px-2">
+    <span class="input-group-text" id="basic-addon1">Abre</span>
+    <input 
+      type="number" 
+      id="abre-ipt" 
+      class="form-control w-25" 
+      placeholder="00" 
+      value="${client.abre ? `${client.abre}` : `0`}" />
+    <span class="input-group-text" id="basic-addon1">Fecha</span>
+    <input 
+      type="number" 
+      id="fecha-ipt" 
+      class="form-control w-25" placeholder="00" 
+      value="${client.fecha ? `${client.fecha}` : `0`}" />
+  </div>`;
+
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'CEP',
     value: client.cep,
   });
@@ -103,7 +121,7 @@ export function editInputs(client: Client) {
   });
 
   line += inputGroup({
-    type: 'text',
+    type: 'number',
     title: 'Número',
     value: client.numero,
   });
@@ -160,7 +178,7 @@ export function editInputs(client: Client) {
     value: String(client.longitude),
   });
 
-  line += blockButton('saveClient', 'Salvar', 'success');
+  line += blockButton('updateLocation', 'Atualizar localização', 'secondary');
 
   return line;
 }

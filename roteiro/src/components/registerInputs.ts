@@ -41,7 +41,7 @@ export function register() {
   line += inputGroup({
     type: 'number',
     title: 'Nascimento',
-    placeholder: 'DD/MM/AAAA',
+    placeholder: 'DDMMAAAA',
   });
 
   line += inputGroup({

@@ -6,12 +6,6 @@ export function manageComponent() {
     <div class="row">
         <div class="col-12">`;
 
-  //   line += selectForm({
-  //     id: 'filter',
-  //     title: 'Filtrar',
-  //     options,
-  //   });
-
   line += inputGroup({
     title: 'Pesquisar',
     type: 'text',
@@ -21,6 +15,8 @@ export function manageComponent() {
   line += `
         </div>
     </div>
+
+    <div id="totalClients" class="d-flex justify-content-end fst-italic px-2"></div>
 
     <div id="manageContent"></div>
 </div>`;
