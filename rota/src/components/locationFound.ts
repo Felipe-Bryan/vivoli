@@ -1,11 +1,12 @@
 import { Client } from '../types/Client';
 import { Vendedor } from '../types/Vendedor';
+import { atendimento } from '../utils/atendimento';
 import { getSessionStorageData } from '../utils/handleStorage';
 import { mapLinker } from '../utils/mapLinker';
 import { maskCep, maskPhone } from '../utils/masks';
 import { blockButton } from './blockButton';
 import { row } from './row';
-import { rowIcon } from './rowIcon';
+import { rowBtn } from './rowIcon';
 
 export function locationFound(client: Client) {
   const vendedores: Vendedor[] = getSessionStorageData('vendedores');
@@ -50,9 +51,14 @@ export function locationFound(client: Client) {
     value: client.estado,
   });
 
+  line += row({
+    title: 'Horário',
+    value: atendimento(client),
+  });
+
   line += blockButton({
     id: 'openMap',
-    title: 'Abrir Mapa',
+    title: 'Mostrar no mapa',
     type: 'info',
   });
 
@@ -61,10 +67,12 @@ export function locationFound(client: Client) {
     value: vendedor.nome,
   });
 
-  line += rowIcon({
+  line += rowBtn({
+    btnId: 'telVendedor',
     title: 'Tel',
     value: maskPhone(vendedor.tel),
-    icon: '<i class="bi bi-whatsapp text-success" id="telVendedor"></i>',
+    color: 'success',
+    icon: '<i class="bi bi-whatsapp"></i>',
   });
 
   line += row({
@@ -72,10 +80,12 @@ export function locationFound(client: Client) {
     value: client.nome,
   });
 
-  line += rowIcon({
+  line += rowBtn({
+    btnId: 'telCliente',
     title: 'Tel',
     value: maskPhone(client.tel),
-    icon: '<i class="bi bi-whatsapp text-success" id="telCliente"></i>',
+    color: 'success',
+    icon: '<i class="bi bi-whatsapp"></i>',
   });
 
   spot.innerHTML = line;
