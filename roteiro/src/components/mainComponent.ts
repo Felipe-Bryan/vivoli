@@ -25,14 +25,12 @@ export function mainComponent() {
 
 <div id="content"></div>
 
-<button id="modalToggle" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" style="display: none!important;"></button>
-
 <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modalContent"></div>
             <div class="modal-footer" id="modalFooter">

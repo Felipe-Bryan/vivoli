@@ -1,9 +1,9 @@
-import { blockButton } from '../../components/blockButton';
-import { inputGroup } from '../../components/inputGroup';
-import { SelectOptionItem, selectForm } from '../../components/selectForm';
-import { Client } from '../../types/Client';
-import { getSessionStorageData, saveToSessionStorage } from '../../utils/handleStorage';
-import { removeInvalidChar } from '../../utils/removeInvalidChar';
+import { blockButton } from '../../../components/blockButton';
+import { inputGroup } from '../../../components/inputGroup';
+import { SelectOptionItem, selectForm } from '../../../components/selectForm';
+import { Client } from '../../../types/Client';
+import { getSessionStorageData, saveToSessionStorage } from '../../../utils/handleStorage';
+import { removeInvalidChar } from '../../../utils/removeInvalidChar';
 
 export function editInputs(client: Client) {
   const diasSemana: SelectOptionItem[] = [
@@ -23,12 +23,14 @@ export function editInputs(client: Client) {
 
   const setores: SelectOptionItem[] = getSessionStorageData('setores');
 
-  let line = `${blockButton(
-    `viewFreezer`,
-    `Ver Info Freezers`,
-    'secondary',
-    `data-bs-toggle="modal" data-bs-target="#modal2"`
-  )}`;
+  let line = '';
+
+  // line += blockButton(
+  //   `viewFreezer`,
+  //   `Ver Info Freezers`,
+  //   'secondary',
+  //   `data-bs-toggle="modal" data-bs-target="#modal2"`
+  // );
 
   line += inputGroup({
     type: 'text',
@@ -93,19 +95,20 @@ export function editInputs(client: Client) {
 
   line += `
   <div class="input-group m-0 mb-2 px-2">
-    <span class="input-group-text" id="basic-addon1">Abre</span>
+    <span class="input-group-text w-25" id="basic-addon1">Abre</span>
     <input 
-      type="number" 
+      type="text" 
       id="abre-ipt" 
       class="form-control w-25" 
-      placeholder="00" 
-      value="${client.abre ? `${client.abre}` : `0`}" />
-    <span class="input-group-text" id="basic-addon1">Fecha</span>
+      placeholder="00:00" 
+      value="${client.abre !== '-' ? `${client.abre}` : `00:00`}" />
+    <span class="input-group-text w-25" id="basic-addon1">Fecha</span>
     <input 
-      type="number" 
+      type="text" 
       id="fecha-ipt" 
-      class="form-control w-25" placeholder="00" 
-      value="${client.fecha ? `${client.fecha}` : `0`}" />
+      class="form-control w-25" 
+      placeholder="00:00" 
+      value="${client.fecha !== '-' ? `${client.fecha}` : `00:00`}" />
   </div>`;
 
   line += inputGroup({

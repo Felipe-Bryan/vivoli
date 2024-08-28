@@ -23,3 +23,13 @@ export async function apiGet(url: string) {
 
   return result;
 }
+
+export async function apiPut(url: string, info: any) {
+  let result: any;
+
+  await api.put(`vivoli/${url}`, info).then((data) => {
+    result = data.data;
+  });
+
+  return result;
+}
