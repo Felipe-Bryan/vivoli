@@ -1,4 +1,4 @@
-import { loginForm } from '../../components/loginForm';
+import { loginForm } from './components/loginForm';
 import { apiPost } from '../../service/api.service';
 import { saveToStorage } from '../../utils/handleStorage';
 import { startApp } from '../app/startApp';

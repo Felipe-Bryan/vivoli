@@ -1,7 +1,7 @@
 import { getSessionStorageData } from '../utils/handleStorage';
 import { blockButton } from './blockButton';
 import { inputGroup } from './inputGroup';
-import { selectForm, SelectOptionItem } from './selectForm';
+import { SelectOptionItem, selectForm } from './selectForm';
 
 export function register() {
   const diasSemana: SelectOptionItem[] = [
@@ -76,10 +76,50 @@ export function register() {
 
   line += `
 <div class="input-group m-0 mb-2 px-2">
-  <span class="input-group-text" id="basic-addon1">Abre</span>
-  <input type="number" id="abre-ipt" class="form-control w-25" placeholder="00" />
-  <span class="input-group-text" id="basic-addon1">Fecha</span>
-  <input type="number" id="fecha-ipt" class="form-control w-25" placeholder="00" />
+  <span class="input-group-text w-25" id="basic-addon1">Atendimento</span>
+  <input
+    type="number"
+    id="abreH"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="12"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">:</span>
+  <input
+    type="number"
+    id="abreM"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="59"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">à</span>
+  <input
+    type="number"
+    id="fechaH"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="12"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">:</span>
+  <input
+    type="number"
+    id="fechaM"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="59"
+    step="1" />
 </div>`;
 
   line += inputGroup({

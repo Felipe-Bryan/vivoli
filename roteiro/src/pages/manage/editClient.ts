@@ -6,11 +6,16 @@ import { getCep } from '../../service/cep.service';
 import { Ativo } from '../../types/Ativo';
 import { Client } from '../../types/Client';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
+import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
+import { setHourString } from '../../utils/setHourString';
+import { calcSequencia } from '../register/calcSequencia';
 import { editInputs } from './components/editClientInputs';
 
 export function editClient(id: string) {
+  getLocation();
+
   const clients: Client[] = getSessionStorageData('clients');
 
   const client = clients.find((item) => item.id === id);
@@ -30,8 +35,11 @@ export function editClient(id: string) {
       ie: <HTMLInputElement>document.getElementById('ie-ipt')!,
       razao: <HTMLInputElement>document.getElementById('razao-ipt')!,
       fantasia: <HTMLInputElement>document.getElementById('fantasia-ipt')!,
-      abre: <HTMLInputElement>document.getElementById('abre-ipt')!,
-      fecha: <HTMLInputElement>document.getElementById('fecha-ipt')!,
+
+      abreH: <HTMLInputElement>document.getElementById('abreH')!,
+      abreM: <HTMLInputElement>document.getElementById('abreM')!,
+      fechaH: <HTMLInputElement>document.getElementById('fechaH')!,
+      fechaM: <HTMLInputElement>document.getElementById('fechaM')!,
 
       cep: <HTMLInputElement>document.getElementById('cep-ipt')!,
       endereco: <HTMLInputElement>document.getElementById('endereco-ipt')!,
@@ -70,11 +78,13 @@ export function editClient(id: string) {
     const updateLocationBtn = document.getElementById('updateLocation')!;
 
     updateLocationBtn.addEventListener('click', () => {
-      const latitude = getSessionStorageData('latitude');
-      const longitude = getSessionStorageData('longitude');
+      setTimeout(() => {
+        const latitude = getSessionStorageData('latitude');
+        const longitude = getSessionStorageData('longitude');
 
-      inputs.latitude.value = latitude;
-      inputs.longitude.value = longitude;
+        inputs.latitude.value = latitude;
+        inputs.longitude.value = longitude;
+      }, 1000);
     });
 
     // const viewFreezerBtn = document.getElementById('viewFreezer')!;
@@ -117,8 +127,8 @@ export function editClient(id: string) {
         ie: removeInvalidChar(inputs.ie.value),
         razao: removeInvalidChar(inputs.razao.value),
         fantasia: removeInvalidChar(inputs.fantasia.value),
-        abre: removeInvalidChar(inputs.abre.value),
-        fecha: removeInvalidChar(inputs.fecha.value),
+        abre: setHourString(Number(inputs.abreH.value), Number(inputs.abreM.value)),
+        fecha: setHourString(Number(inputs.fechaH.value), Number(inputs.fechaM.value)),
 
         cep: removeInvalidCharCep(inputs.cep.value),
         endereco: removeInvalidChar(inputs.endereco.value),
@@ -143,6 +153,11 @@ export function editClient(id: string) {
       const valid: boolean = validateClient(editedClient, clients, inputs);
 
       if (valid) {
+        editedClient.latitude = getSessionStorageData('latitude');
+        editedClient.longitude = getSessionStorageData('longitude');
+        editedClient.razao = editedClient.razao.toLowerCase();
+        editedClient.sequencia = calcSequencia(editedClient);
+
         await apiPut(`client/${client.id}`, editedClient)
           .then(() => {
             location.reload();

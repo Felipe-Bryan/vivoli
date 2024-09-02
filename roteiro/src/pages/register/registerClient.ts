@@ -1,4 +1,4 @@
-import { register } from '../../components/registerInputs';
+import { register } from './components/registerInputs';
 import { apiPost } from '../../service/api.service';
 import { getCep } from '../../service/cep.service';
 import { Client } from '../../types/Client';
@@ -8,6 +8,8 @@ import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from 
 import { defineRoot } from '../../utils/defineRoot';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
 import { validateClient } from '../../functions/validateClient';
+import { calcSequencia } from './calcSequencia';
+import { setHourString } from '../../utils/setHourString';
 
 export async function registerClient() {
   const spot = defineRoot();
@@ -28,8 +30,11 @@ export async function registerClient() {
     ie: <HTMLInputElement>document.getElementById('ie-ipt')!,
     razao: <HTMLInputElement>document.getElementById('razao-ipt')!,
     fantasia: <HTMLInputElement>document.getElementById('fantasia-ipt')!,
-    abre: <HTMLInputElement>document.getElementById('abre-ipt')!,
-    fecha: <HTMLInputElement>document.getElementById('fecha-ipt')!,
+
+    abreH: <HTMLInputElement>document.getElementById('abreH')!,
+    abreM: <HTMLInputElement>document.getElementById('abreM')!,
+    fechaH: <HTMLInputElement>document.getElementById('fechaH')!,
+    fechaM: <HTMLInputElement>document.getElementById('fechaM')!,
 
     cep: <HTMLInputElement>document.getElementById('cep-ipt')!,
     endereco: <HTMLInputElement>document.getElementById('endereco-ipt')!,
@@ -61,7 +66,7 @@ export async function registerClient() {
         }
       })
       .catch(() => {
-        console.log('Não encontrado');
+        alert('CEP não encontrado!');
       });
   });
 
@@ -71,7 +76,7 @@ export async function registerClient() {
 
     inputs.latitude.value = latitude;
     inputs.longitude.value = longitude;
-  }, 1000);
+  }, 2000);
 
   const saveClientBtn = document.getElementById('saveClient')!;
 
@@ -89,8 +94,8 @@ export async function registerClient() {
     const ie = removeInvalidChar(inputs.ie.value);
     const razao = removeInvalidChar(inputs.razao.value);
     const fantasia = removeInvalidChar(inputs.fantasia.value);
-    const abre = removeInvalidChar(inputs.abre.value);
-    const fecha = removeInvalidChar(inputs.fecha.value);
+    const abre = setHourString(Number(inputs.abreH.value), Number(inputs.abreM.value));
+    const fecha = setHourString(Number(inputs.fechaH.value), Number(inputs.fechaM.value));
 
     const cep = removeInvalidCharCep(inputs.cep.value);
     const endereco = removeInvalidChar(inputs.endereco.value);
@@ -103,8 +108,8 @@ export async function registerClient() {
     const diaSemana = inputs.diaSemana.value;
     const frequencia = inputs.frequencia.value;
 
-    let latitude = Number(inputs.latitude.value);
-    let longitude = Number(inputs.longitude.value);
+    const latitude = getSessionStorageData('latitude');
+    const longitude = getSessionStorageData('longitude');
 
     const newClient: Client = {
       nome,
@@ -130,7 +135,7 @@ export async function registerClient() {
       setor,
       ativo: true,
       bloqueado: false,
-      atendido: true,
+      atendido: '-',
       diaSemana,
       frequencia,
       sequencia: clients.length + 1,
@@ -144,6 +149,7 @@ export async function registerClient() {
       newClient.latitude = getSessionStorageData('latitude');
       newClient.longitude = getSessionStorageData('longitude');
       newClient.razao = newClient.razao.toLowerCase();
+      newClient.sequencia = calcSequencia(newClient);
 
       await apiPost(`client`, newClient)
         .then(() => {

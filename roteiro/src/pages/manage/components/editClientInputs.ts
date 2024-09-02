@@ -3,7 +3,7 @@ import { inputGroup } from '../../../components/inputGroup';
 import { SelectOptionItem, selectForm } from '../../../components/selectForm';
 import { Client } from '../../../types/Client';
 import { getSessionStorageData, saveToSessionStorage } from '../../../utils/handleStorage';
-import { removeInvalidChar } from '../../../utils/removeInvalidChar';
+import { maskBirth, maskCep, maskCPF, maskPhone } from '../../../utils/masks';
 
 export function editInputs(client: Client) {
   const diasSemana: SelectOptionItem[] = [
@@ -54,7 +54,7 @@ export function editInputs(client: Client) {
     type: 'number',
     title: 'Nascimento',
     placeholder: 'DDMMAAAA',
-    value: removeInvalidChar(client.nascimento),
+    value: maskBirth(client.nascimento),
   });
 
   line += inputGroup({
@@ -66,13 +66,13 @@ export function editInputs(client: Client) {
   line += inputGroup({
     type: 'number',
     title: 'Tel',
-    value: client.tel,
+    value: maskPhone(client.tel),
   });
 
   line += inputGroup({
     type: 'number',
     title: 'CNPJ',
-    value: client.cnpj,
+    value: maskCPF(client.cnpj),
   });
 
   line += inputGroup({
@@ -94,27 +94,61 @@ export function editInputs(client: Client) {
   });
 
   line += `
-  <div class="input-group m-0 mb-2 px-2">
-    <span class="input-group-text w-25" id="basic-addon1">Abre</span>
-    <input 
-      type="text" 
-      id="abre-ipt" 
-      class="form-control w-25" 
-      placeholder="00:00" 
-      value="${client.abre !== '-' ? `${client.abre}` : `00:00`}" />
-    <span class="input-group-text w-25" id="basic-addon1">Fecha</span>
-    <input 
-      type="text" 
-      id="fecha-ipt" 
-      class="form-control w-25" 
-      placeholder="00:00" 
-      value="${client.fecha !== '-' ? `${client.fecha}` : `00:00`}" />
-  </div>`;
+<div class="input-group m-0 mb-2 px-2">
+  <span class="input-group-text w-25" id="basic-addon1">Atendimento</span>
+  <input
+    type="number"
+    id="abreH"
+    value="${client.abre[0]}${client.abre[1]}"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="12"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">:</span>
+  <input
+    type="number"
+    id="abreM"
+    value="${client.abre[3]}${client.abre[4]}"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="59"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">à</span>
+  <input
+    type="number"
+    id="fechaH"
+    value="${client.fecha[0]}${client.fecha[1]}"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="12"
+    step="1" />
+  <span class="input-group-text" id="basic-addon1">:</span>
+  <input
+    type="number"
+    id="fechaM"
+    value="${client.fecha[3]}${client.fecha[4]}"
+    class="form-control"
+    placeholder="00"
+    aria-label="00"
+    aria-describedby="basic-addon1"
+    min="0"
+    max="59"
+    step="1" />
+</div>`;
 
   line += inputGroup({
     type: 'number',
     title: 'CEP',
-    value: client.cep,
+    value: maskCep(client.cep),
   });
 
   line += inputGroup({
