@@ -64,7 +64,7 @@ export const produtos: Product[] = [
     caixa: true,
     familia: '14',
   },
-  { id: '20', nome: 'Picolé Di Morango Morango', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
+  { id: '20', nome: 'Picolé Di Leite Morango', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
   {
     id: '22',
     nome: 'Picolé Especialité Morango recheado',
@@ -93,7 +93,7 @@ export const produtos: Product[] = [
     familia: '21',
   },
   { id: '25', nome: 'Picolé Especialité Tablets', custo: 4.23, caixaQt: 26, sugestao: 6, caixa: true, familia: '21' },
-  { id: '26', nome: 'Picolé Especialité Vivotello', custo: 4.23, caixaQt: 26, sugestao: 6, caixa: true, familia: '21' },
+  { id: '26', nome: 'Picolé Especialité Vivotello', custo: 4.23, caixaQt: 24, sugestao: 6, caixa: true, familia: '21' },
   { id: '28', nome: 'Paleta Leite Trufado', custo: 5.68, caixaQt: 14, sugestao: 8, caixa: true, familia: '27' },
   {
     id: '29',
