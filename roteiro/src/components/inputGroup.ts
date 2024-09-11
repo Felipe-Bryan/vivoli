@@ -4,7 +4,7 @@ interface InputGroupType {
   type: 'text' | 'number' | 'password' | 'email';
   title: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   disabled?: boolean;
   step?: number;
 }

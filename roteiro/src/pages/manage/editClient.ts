@@ -6,6 +6,7 @@ import { getCep } from '../../service/cep.service';
 import { Ativo } from '../../types/Ativo';
 import { Client } from '../../types/Client';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
+import { clearInputs } from '../../utils/clearInputs';
 import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
@@ -150,23 +151,20 @@ export function editClient(id: string) {
         sequencia: client.sequencia,
       };
 
-      const valid: boolean = validateClient(editedClient, clients, inputs);
+      const valid = validateClient(editedClient, inputs);
 
-      if (valid) {
-        editedClient.latitude = getSessionStorageData('latitude');
-        editedClient.longitude = getSessionStorageData('longitude');
-        editedClient.razao = editedClient.razao.toLowerCase();
-        editedClient.sequencia = calcSequencia(editedClient);
-
-        await apiPut(`client/${client.id}`, editedClient)
+      if (valid !== undefined) {
+        await apiPut(`client/${client.id}`, valid)
           .then(() => {
-            location.reload();
+            clearInputs();
+
+            alert('Cliente editado com sucesso!');
           })
           .catch(() => {
             alert('Erro ao atualizar cliente, tente novamente mais tarde!');
           });
       } else {
-        console.log(`Não salvar edição`);
+        console.log('Falha');
       }
     });
   } else {

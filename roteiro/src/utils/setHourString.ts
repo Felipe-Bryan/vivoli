@@ -1,11 +1,11 @@
 export function setHourString(hour: number, minute: number) {
-  let hourString = '';
+  let hourString = String(hour);
 
   if (hour < 10) {
     hourString = `0${hour}`;
   }
 
-  let minString = '';
+  let minString = String(minute);
 
   if (minute < 10) {
     minString = `0${minute}`;

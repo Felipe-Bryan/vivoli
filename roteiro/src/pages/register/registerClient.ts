@@ -10,6 +10,7 @@ import { RegisterClientInputs } from '../../types/RegisterClientInputs';
 import { validateClient } from '../../functions/validateClient';
 import { calcSequencia } from './calcSequencia';
 import { setHourString } from '../../utils/setHourString';
+import { clearInputs } from '../../utils/clearInputs';
 
 export async function registerClient() {
   const spot = defineRoot();
@@ -141,27 +142,20 @@ export async function registerClient() {
       sequencia: clients.length + 1,
     };
 
-    let valid: boolean = validateClient(newClient, clients, inputs);
+    const validated = validateClient(newClient, inputs);
 
-    if (valid === false) {
-      return;
-    } else {
-      newClient.latitude = getSessionStorageData('latitude');
-      newClient.longitude = getSessionStorageData('longitude');
-      newClient.razao = newClient.razao.toLowerCase();
-      newClient.sequencia = calcSequencia(newClient);
-
-      await apiPost(`client`, newClient)
+    if (validated !== undefined) {
+      await apiPost(`client`, validated)
         .then(() => {
-          alert('Cliente salvo com sucesso!');
+          clearInputs();
 
-          setTimeout(() => {
-            registerClient();
-          }, 3000);
+          alert('Cliente salvo com sucesso!');
         })
         .catch(() => {
           alert('Erro ao salvar cliente!\nRecarregue a página e tente novamente.');
         });
+    } else {
+      console.log('Falha');
     }
   });
 }

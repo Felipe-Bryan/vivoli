@@ -41,20 +41,20 @@ export function editInputs(client: Client) {
   line += inputGroup({
     type: 'number',
     title: 'CPF',
-    value: client.cpf,
+    value: Number(client.cpf),
   });
 
   line += inputGroup({
     type: 'number',
     title: 'RG',
-    value: client.rg,
+    value: Number(client.rg),
   });
 
   line += inputGroup({
-    type: 'number',
+    type: 'text',
     title: 'Nascimento',
     placeholder: 'DDMMAAAA',
-    value: maskBirth(client.nascimento),
+    value: client.nascimento,
   });
 
   line += inputGroup({
@@ -66,19 +66,19 @@ export function editInputs(client: Client) {
   line += inputGroup({
     type: 'number',
     title: 'Tel',
-    value: maskPhone(client.tel),
+    value: Number(client.tel),
   });
 
   line += inputGroup({
     type: 'number',
     title: 'CNPJ',
-    value: maskCPF(client.cnpj),
+    value: Number(client.cnpj),
   });
 
   line += inputGroup({
     type: 'number',
     title: 'IE',
-    value: client.ie,
+    value: Number(client.ie),
   });
 
   line += inputGroup({
@@ -99,19 +99,19 @@ export function editInputs(client: Client) {
   <input
     type="number"
     id="abreH"
-    value="${client.abre[0]}${client.abre[1]}"
+    value="${Number(client.abre[0])}${Number(client.abre[1])}"
     class="form-control"
     placeholder="00"
     aria-label="00"
     aria-describedby="basic-addon1"
     min="0"
-    max="12"
+    max="23"
     step="1" />
   <span class="input-group-text" id="basic-addon1">:</span>
   <input
     type="number"
     id="abreM"
-    value="${client.abre[3]}${client.abre[4]}"
+    value="${Number(client.abre[3])}${Number(client.abre[4])}"
     class="form-control"
     placeholder="00"
     aria-label="00"
@@ -123,19 +123,19 @@ export function editInputs(client: Client) {
   <input
     type="number"
     id="fechaH"
-    value="${client.fecha[0]}${client.fecha[1]}"
+    value="${Number(client.fecha[0])}${Number(client.fecha[1])}"
     class="form-control"
     placeholder="00"
     aria-label="00"
     aria-describedby="basic-addon1"
     min="0"
-    max="12"
+    max="23"
     step="1" />
   <span class="input-group-text" id="basic-addon1">:</span>
   <input
     type="number"
     id="fechaM"
-    value="${client.fecha[3]}${client.fecha[4]}"
+    value="${Number(client.fecha[3])}${Number(client.fecha[4])}"
     class="form-control"
     placeholder="00"
     aria-label="00"
@@ -148,7 +148,7 @@ export function editInputs(client: Client) {
   line += inputGroup({
     type: 'number',
     title: 'CEP',
-    value: maskCep(client.cep),
+    value: Number(client.cep),
   });
 
   line += inputGroup({
@@ -160,7 +160,7 @@ export function editInputs(client: Client) {
   line += inputGroup({
     type: 'number',
     title: 'Número',
-    value: client.numero,
+    value: Number(client.numero),
   });
 
   line += inputGroup({
@@ -204,7 +204,7 @@ export function editInputs(client: Client) {
     title: 'Latitude',
     disabled: true,
     step: 0.0000001,
-    value: String(client.latitude),
+    value: Number(client.latitude),
   });
 
   line += inputGroup({
@@ -212,7 +212,7 @@ export function editInputs(client: Client) {
     title: 'Longitude',
     disabled: true,
     step: 0.0000001,
-    value: String(client.longitude),
+    value: Number(client.longitude),
   });
 
   line += blockButton('updateLocation', 'Atualizar localização', 'secondary');

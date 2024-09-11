@@ -5,47 +5,47 @@ export function calcSequencia(client: Client): number {
 
   if (client.frequencia === 'S') {
     if (client.diaSemana === 'Segunda') {
-      return result;
+      result;
     } else if (client.diaSemana === 'Terça') {
-      return result + 100;
+      result += 100;
     } else if (client.diaSemana === 'Quarta') {
-      return result + 200;
+      result += 200;
     } else if (client.diaSemana === 'Quinta') {
-      return result + 300;
+      result += 300;
     } else if (client.diaSemana === 'Sexta') {
-      return result + 400;
+      result += 400;
     } else if (client.diaSemana === 'Sábado') {
-      return result + 500;
+      result += 500;
     }
   }
   if (client.frequencia === 'A') {
     if (client.diaSemana === 'Segunda') {
-      return result + 1000;
+      result += 1000;
     } else if (client.diaSemana === 'Terça') {
-      return result + 1200;
+      result += 1200;
     } else if (client.diaSemana === 'Quarta') {
-      return result + 1400;
+      result += 1400;
     } else if (client.diaSemana === 'Quinta') {
-      return result + 1600;
+      result += 1600;
     } else if (client.diaSemana === 'Sexta') {
-      return result + 1800;
+      result += 1800;
     } else if (client.diaSemana === 'Sábado') {
-      return result + 2000;
+      result += 2000;
     }
   }
   if (client.frequencia === 'B') {
     if (client.diaSemana === 'Segunda') {
-      return result + 1100;
+      result += 1100;
     } else if (client.diaSemana === 'Terça') {
-      return result + 1300;
+      result += 1300;
     } else if (client.diaSemana === 'Quarta') {
-      return result + 1500;
+      result += 1500;
     } else if (client.diaSemana === 'Quinta') {
-      return result + 1700;
+      result += 1700;
     } else if (client.diaSemana === 'Sexta') {
-      return result + 1900;
+      result += 1900;
     } else if (client.diaSemana === 'Sábado') {
-      return result + 2100;
+      result += 2100;
     }
   }
 
@@ -57,47 +57,47 @@ export function reverseCalcSequencia(client: Client) {
 
   if (client.frequencia === 'S') {
     if (client.diaSemana === 'Segunda') {
-      return result;
+      result;
     } else if (client.diaSemana === 'Terça') {
-      return result - 100;
+      result -= 100;
     } else if (client.diaSemana === 'Quarta') {
-      return result - 200;
+      result -= 200;
     } else if (client.diaSemana === 'Quinta') {
-      return result - 300;
+      result -= 300;
     } else if (client.diaSemana === 'Sexta') {
-      return result - 400;
+      result -= 400;
     } else if (client.diaSemana === 'Sábado') {
-      return result - 500;
+      result -= 500;
     }
   }
   if (client.frequencia === 'A') {
     if (client.diaSemana === 'Segunda') {
-      return result - 1000;
+      result -= 1000;
     } else if (client.diaSemana === 'Terça') {
-      return result - 1200;
+      result -= 1200;
     } else if (client.diaSemana === 'Quarta') {
-      return result - 1400;
+      result -= 1400;
     } else if (client.diaSemana === 'Quinta') {
-      return result - 1600;
+      result -= 1600;
     } else if (client.diaSemana === 'Sexta') {
-      return result - 1800;
+      result -= 1800;
     } else if (client.diaSemana === 'Sábado') {
-      return result - 2000;
+      result -= 2000;
     }
   }
   if (client.frequencia === 'B') {
     if (client.diaSemana === 'Segunda') {
-      return result - 1100;
+      result -= 1100;
     } else if (client.diaSemana === 'Terça') {
-      return result - 1300;
+      result -= 1300;
     } else if (client.diaSemana === 'Quarta') {
-      return result - 1500;
+      result -= 1500;
     } else if (client.diaSemana === 'Quinta') {
-      return result - 1700;
+      result -= 1700;
     } else if (client.diaSemana === 'Sexta') {
-      return result - 1900;
+      result -= 1900;
     } else if (client.diaSemana === 'Sábado') {
-      return result - 2100;
+      result -= 2100;
     }
   }
 

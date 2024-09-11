@@ -91,9 +91,8 @@ export function register() {
     class="form-control"
     placeholder="00"
     aria-label="00"
-    aria-describedby="basic-addon1"
     min="0"
-    max="12"
+    max="23"
     step="1" />
   <span class="input-group-text" id="basic-addon1">:</span>
   <input
@@ -102,7 +101,6 @@ export function register() {
     class="form-control"
     placeholder="00"
     aria-label="00"
-    aria-describedby="basic-addon1"
     min="0"
     max="59"
     step="1" />
@@ -113,9 +111,8 @@ export function register() {
     class="form-control"
     placeholder="00"
     aria-label="00"
-    aria-describedby="basic-addon1"
     min="0"
-    max="12"
+    max="23"
     step="1" />
   <span class="input-group-text" id="basic-addon1">:</span>
   <input
@@ -124,7 +121,6 @@ export function register() {
     class="form-control"
     placeholder="00"
     aria-label="00"
-    aria-describedby="basic-addon1"
     min="0"
     max="59"
     step="1" />
