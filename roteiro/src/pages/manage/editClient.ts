@@ -6,12 +6,11 @@ import { getCep } from '../../service/cep.service';
 import { Ativo } from '../../types/Ativo';
 import { Client } from '../../types/Client';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
-import { clearInputs } from '../../utils/clearInputs';
 import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
 import { setHourString } from '../../utils/setHourString';
-import { calcSequencia } from '../register/calcSequencia';
+import { startApp } from '../app/startApp';
 import { editInputs } from './components/editClientInputs';
 
 export function editClient(id: string) {
@@ -156,9 +155,11 @@ export function editClient(id: string) {
       if (valid !== undefined) {
         await apiPut(`client/${client.id}`, valid)
           .then(() => {
-            clearInputs();
-
             alert('Cliente editado com sucesso!');
+
+            setTimeout(() => {
+              startApp();
+            }, 2000);
           })
           .catch(() => {
             alert('Erro ao atualizar cliente, tente novamente mais tarde!');

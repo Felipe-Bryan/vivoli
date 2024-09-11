@@ -8,9 +8,8 @@ import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from 
 import { defineRoot } from '../../utils/defineRoot';
 import { RegisterClientInputs } from '../../types/RegisterClientInputs';
 import { validateClient } from '../../functions/validateClient';
-import { calcSequencia } from './calcSequencia';
 import { setHourString } from '../../utils/setHourString';
-import { clearInputs } from '../../utils/clearInputs';
+import { startApp } from '../app/startApp';
 
 export async function registerClient() {
   const spot = defineRoot();
@@ -147,9 +146,11 @@ export async function registerClient() {
     if (validated !== undefined) {
       await apiPost(`client`, validated)
         .then(() => {
-          clearInputs();
-
           alert('Cliente salvo com sucesso!');
+
+          setTimeout(() => {
+            startApp();
+          }, 2000);
         })
         .catch(() => {
           alert('Erro ao salvar cliente!\nRecarregue a página e tente novamente.');
