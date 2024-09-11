@@ -1,7 +1,7 @@
 import { Product } from '../types/Product';
 
 export const produtos: Product[] = [
-  { id: '2', nome: 'Picolé Le Petit Tuti Frutti', custo: 1.39, caixaQt: 36, sugestao: 2, caixa: true, familia: '1' },
+  { id: '2', nome: 'Picolé Le Petit Tutti Frutti', custo: 1.39, caixaQt: 36, sugestao: 2, caixa: true, familia: '1' },
   { id: '3', nome: 'Picolé Le Petit Groselha', custo: 1.39, caixaQt: 36, sugestao: 2, caixa: true, familia: '1' },
   { id: '4', nome: 'Picolé Le Petit Chocolate', custo: 1.39, caixaQt: 36, sugestao: 2, caixa: true, familia: '1' },
   {
@@ -31,24 +31,23 @@ export const produtos: Product[] = [
     caixa: true,
     familia: '6',
   },
-  { id: '10', nome: 'Picolé Di Fruta Abacaxi', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
-  { id: '11', nome: 'Picolé Di Fruta Limão', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
-  { id: '12', nome: 'Picolé Di Fruta Maracujá', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
-  { id: '13', nome: 'Picolé Di Fruta Uva', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
-  { id: '15', nome: 'Picolé Di Leite Chocolate', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
-  { id: '16', nome: 'Picolé Di Leite Coco', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
+  { id: '10', nome: 'Picolé Di Frutti Abacaxi', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
+  { id: '11', nome: 'Picolé Di Frutti Limão', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
+  { id: '12', nome: 'Picolé Di Frutti Maracujá', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
+  { id: '13', nome: 'Picolé Di Frutti Uva', custo: 1.74, caixaQt: 28, sugestao: 2.5, caixa: true, familia: '9' },
   {
-    id: '17',
-    nome: 'Picolé Di Leite Leite Condensado',
+    id: '15',
+    nome: 'Picolé Di Leitti Chocolate',
     custo: 2.27,
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
     familia: '14',
   },
+  { id: '16', nome: 'Picolé Di Leitti Coco', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
   {
     id: '18',
-    nome: 'Picolé Di Leite Limonada Suiça',
+    nome: 'Picolé Di Leitti Limonada Suiça',
     custo: 2.27,
     caixaQt: 28,
     sugestao: 3.25,
@@ -57,14 +56,14 @@ export const produtos: Product[] = [
   },
   {
     id: '19',
-    nome: 'Picolé Di Leite Milho Verde',
+    nome: 'Picolé Di Leitti Milho Verde',
     custo: 2.27,
     caixaQt: 28,
     sugestao: 3.25,
     caixa: true,
     familia: '14',
   },
-  { id: '20', nome: 'Picolé Di Leite Morango', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
+  { id: '20', nome: 'Picolé Di Leitti Morango', custo: 2.27, caixaQt: 28, sugestao: 3.25, caixa: true, familia: '14' },
   {
     id: '22',
     nome: 'Picolé Especialité Morango recheado',
@@ -104,10 +103,10 @@ export const produtos: Product[] = [
     caixa: true,
     familia: '27',
   },
-  { id: '31', nome: 'Extrusado Absoluto Avelã', custo: 5.11, caixaQt: 20, sugestao: 7.25, caixa: true, familia: '30' },
+  { id: '31', nome: 'Extrusado Absolutto Avelã', custo: 5.11, caixaQt: 20, sugestao: 7.25, caixa: true, familia: '30' },
   {
     id: '32',
-    nome: 'Extrusado Absoluto Avelã ao Leite',
+    nome: 'Extrusado Absolutto Avelã ao Leite',
     custo: 5.11,
     caixaQt: 20,
     sugestao: 7.25,
@@ -116,7 +115,7 @@ export const produtos: Product[] = [
   },
   {
     id: '33',
-    nome: 'Extrusado Absoluto Chocolate Trufado',
+    nome: 'Extrusado Absolutto Chocolate Trufado',
     custo: 5.11,
     caixaQt: 20,
     sugestao: 7.25,
@@ -125,7 +124,7 @@ export const produtos: Product[] = [
   },
   {
     id: '34',
-    nome: 'Extrusado Absoluto Iogurte c/ Amarena',
+    nome: 'Extrusado Absolutto Iogurte c/ Amarena',
     custo: 5.11,
     caixaQt: 20,
     sugestao: 7.25,
@@ -134,7 +133,7 @@ export const produtos: Product[] = [
   },
   {
     id: '35',
-    nome: 'Extrusado Absoluto Petit Gateau',
+    nome: 'Extrusado Absolutto Petit Gateau',
     custo: 5.11,
     caixaQt: 20,
     sugestao: 7.25,
@@ -143,7 +142,7 @@ export const produtos: Product[] = [
   },
   {
     id: '36',
-    nome: 'Extrusado Absoluto Torta de Limão',
+    nome: 'Extrusado Absolutto Torta de Limão',
     custo: 5.11,
     caixaQt: 20,
     sugestao: 7.25,
@@ -250,7 +249,7 @@ export const produtos: Product[] = [
   },
   {
     id: '73',
-    nome: 'Pote 1,020lts Açaí c/ Trufado',
+    nome: 'Pote 1,020lts Açaí c/ Avelã',
     custo: 22.78,
     caixaQt: 6,
     sugestao: 29,
