@@ -1,4 +1,4 @@
-import { calcSequencia } from '../pages/register/calcSequencia';
+import { calcSequencia, reverseCalcSequencia } from '../pages/register/calcSequencia';
 import { Client } from '../types/Client';
 import { RegisterClientInputs } from '../types/RegisterClientInputs';
 import { getSessionStorageData } from '../utils/handleStorage';

@@ -138,7 +138,7 @@ export async function registerClient() {
       atendido: '-',
       diaSemana,
       frequencia,
-      sequencia: clients.length + 1,
+      sequencia: String(clients.length + 1),
     };
 
     const validated = validateClient(newClient, inputs);

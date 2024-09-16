@@ -28,7 +28,7 @@ export interface Client {
   atendido: string;
   diaSemana: string;
   frequencia: string;
-  sequencia: number;
+  sequencia: string;
 
   latitude: number;
   longitude: number;

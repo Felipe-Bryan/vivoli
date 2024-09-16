@@ -10,7 +10,9 @@ import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
 import { removeInvalidChar, removeInvalidCharCep, removeInvalidCharPhone } from '../../utils/removeInvalidChar';
 import { setHourString } from '../../utils/setHourString';
+import { closeModal1 } from '../../utils/toggleModal';
 import { startApp } from '../app/startApp';
+import { reverseCalcSequencia } from '../register/calcSequencia';
 import { editInputs } from './components/editClientInputs';
 
 export function editClient(id: string) {
@@ -73,6 +75,22 @@ export function editClient(id: string) {
         .catch(() => {
           console.log('Não encontrado');
         });
+    });
+
+    const options = document.querySelectorAll('option');
+
+    options.forEach((option) => {
+      if (option.value === client.setor) {
+        option.selected = true;
+      }
+
+      if (option.value === client.diaSemana) {
+        option.selected = true;
+      }
+
+      if (option.value === client.frequencia) {
+        option.selected = true;
+      }
     });
 
     const updateLocationBtn = document.getElementById('updateLocation')!;
@@ -147,7 +165,7 @@ export function editClient(id: string) {
         ativo: client.ativo,
         bloqueado: client.bloqueado,
         atendido: client.atendido,
-        sequencia: client.sequencia,
+        sequencia: reverseCalcSequencia(client),
       };
 
       const valid = validateClient(editedClient, inputs);
@@ -155,6 +173,8 @@ export function editClient(id: string) {
       if (valid !== undefined) {
         await apiPut(`client/${client.id}`, valid)
           .then(() => {
+            closeModal1();
+
             alert('Cliente editado com sucesso!');
 
             setTimeout(() => {

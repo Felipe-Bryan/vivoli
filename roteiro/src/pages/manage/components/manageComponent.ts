@@ -4,12 +4,12 @@ export function manageComponent() {
   let line = `
 <div class="container p-0">
     <div class="row">
-        <div class="col-12">`;
+        <div class="col">`;
 
   line += inputGroup({
     title: 'Pesquisar',
     type: 'text',
-    placeholder: 'CPF/CNPJ/Nome/Razão',
+    placeholder: 'CPF/CNPJ/Nome/Razão/Cidade',
   });
 
   line += `

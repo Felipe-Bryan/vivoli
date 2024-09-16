@@ -1,7 +1,7 @@
 import { Client } from '../../types/Client';
 
-export function calcSequencia(client: Client): number {
-  let result = client.sequencia;
+export function calcSequencia(client: Client): string {
+  let result = Number(client.sequencia);
 
   if (client.frequencia === 'S') {
     if (client.diaSemana === 'Segunda') {
@@ -49,11 +49,11 @@ export function calcSequencia(client: Client): number {
     }
   }
 
-  return result;
+  return String(result);
 }
 
-export function reverseCalcSequencia(client: Client) {
-  let result = client.sequencia;
+export function reverseCalcSequencia(client: Client): string {
+  let result = Number(client.sequencia);
 
   if (client.frequencia === 'S') {
     if (client.diaSemana === 'Segunda') {
@@ -101,5 +101,5 @@ export function reverseCalcSequencia(client: Client) {
     }
   }
 
-  return result;
+  return String(result);
 }

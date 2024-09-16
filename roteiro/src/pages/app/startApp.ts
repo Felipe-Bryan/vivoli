@@ -5,6 +5,7 @@ import { apiGet } from '../../service/api.service';
 import { Vendedor } from '../../types/Vendedor';
 import { getStorageData, saveToSessionStorage } from '../../utils/handleStorage';
 import { setButton } from '../../utils/setButton';
+import { startConfigRoute } from '../configRoute/startConfigRoute';
 import { startHome } from '../home/startHome';
 import { startManage } from '../manage/startManage';
 import { registerClient } from '../register/registerClient';
@@ -52,6 +53,7 @@ export async function startApp() {
       root.innerHTML = mainComponent();
 
       setButton('home', () => startApp());
+      setButton('adjustRoute', () => startConfigRoute());
       setButton('newClient', () => registerClient());
       setButton('manageClient', () => startManage());
       setButton('logout', () => logout());

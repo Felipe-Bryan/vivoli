@@ -41,12 +41,11 @@ export function startManage() {
         spot.innerHTML += clientRow(client);
       });
 
-      componentVisibility('totalClients', 'show');
+      totalSpot.innerHTML = `Total de clientes: ${clients.length}`;
 
       setEditBtns();
     } else {
       spot.innerHTML = '';
-      componentVisibility('totalClients', 'hide');
 
       const found: Client[] = [];
 
@@ -68,9 +67,19 @@ export function startManage() {
 
       cnpjFound.forEach((item) => found.push(item));
 
-      found.forEach((client) => {
+      const cityFound: Client[] = clients.filter((item) => {
+        return item.cidade.includes(searchValue);
+      });
+
+      cityFound.forEach((item) => found.push(item));
+
+      const checked = new Set(found);
+
+      checked.forEach((client) => {
         spot.innerHTML += clientRow(client);
       });
+
+      totalSpot.innerHTML = `Total de clientes: ${checked.size}`;
 
       setEditBtns();
     }
