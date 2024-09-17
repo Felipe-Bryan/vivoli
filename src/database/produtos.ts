@@ -199,14 +199,14 @@ export const produtos: Product[] = [
   },
   {
     id: '49',
-    nome: 'Extrusado Mini Pé Moleque Preto',
+    nome: 'Mini Extrusado Pé Moleque',
     custo: 3.87,
     caixaQt: 20,
     sugestao: 5.5,
     caixa: true,
     familia: '48',
   },
-  { id: '50', nome: 'Extrusado Mini Skimo', custo: 3.87, caixaQt: 20, sugestao: 5.5, caixa: true, familia: '48' },
+  { id: '50', nome: 'Mini Extrusado Skimo', custo: 3.87, caixaQt: 20, sugestao: 5.5, caixa: true, familia: '48' },
   {
     id: '52',
     nome: 'Extrusado Di infantil Algodão Doce',

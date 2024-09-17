@@ -3,6 +3,7 @@ import { componentVisibility } from '../../utils/componentVisibility';
 import { defineRoot } from '../../utils/defineRoot';
 import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
+import { mapLinker } from '../../utils/mapLinker';
 import { removeInvalidChar } from '../../utils/removeInvalidChar';
 import { setEventListener } from '../../utils/setButton';
 import { clientRow } from './components/clientRow';
@@ -25,6 +26,7 @@ export function startManage() {
   });
 
   setEditBtns();
+  setLocationBtns();
 
   const totalSpot = document.getElementById('totalClients')!;
   totalSpot.innerHTML = `Total de clientes: ${clients.length}`;
@@ -44,6 +46,7 @@ export function startManage() {
       totalSpot.innerHTML = `Total de clientes: ${clients.length}`;
 
       setEditBtns();
+      setLocationBtns();
     } else {
       spot.innerHTML = '';
 
@@ -82,6 +85,7 @@ export function startManage() {
       totalSpot.innerHTML = `Total de clientes: ${checked.size}`;
 
       setEditBtns();
+      setLocationBtns();
     }
   });
 }
@@ -91,5 +95,20 @@ function setEditBtns() {
 
   editBtns.forEach((btn) => {
     setEventListener(btn.id, 'click', () => editClient(btn.id));
+  });
+}
+
+function setLocationBtns() {
+  const locationBtns = <NodeListOf<HTMLElement>>document.querySelectorAll('.location');
+
+  locationBtns.forEach((btn) => {
+    const clientId = btn.id.replace('location', '');
+
+    btn.addEventListener('click', () => {
+      const clients: Client[] = getSessionStorageData('clients');
+      const client = clients.find((item) => item.id === clientId)!;
+
+      window.open(mapLinker(client), '_blank');
+    });
   });
 }
