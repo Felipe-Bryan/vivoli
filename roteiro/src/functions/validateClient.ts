@@ -106,8 +106,6 @@ export function validateClient(client: Client, inputs: RegisterClientInputs) {
   }
 
   client.sequencia = calcSequencia(client);
-  client.latitude = getSessionStorageData('latitude');
-  client.longitude = getSessionStorageData('longitude');
   client.razao = client.razao.toLowerCase();
 
   return client;
