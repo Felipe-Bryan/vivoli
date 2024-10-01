@@ -9,7 +9,7 @@ export function clientRow(client: Client) {
 <div class="row px-1 border-top rounded">
     <div class="col-1 p-0 px-1">${reverseCalcSequencia(client)}</div>
     <div class="col-10 p-0 px-1 fw-bold text-center">${client.fantasia}</div>
-    <div class="col-1 p-0 ps-1" id="location-${client.id}">
+    <div class="col-1 p-0 ps-1 location" id="location${client.id}">
         <i class="bi bi-geo-alt-fill text-primary"></i>
     </div>
 </div>

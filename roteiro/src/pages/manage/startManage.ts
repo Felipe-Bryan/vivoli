@@ -1,9 +1,8 @@
+import { setLocationBtns } from '../../functions/setLocationBtns';
 import { Client } from '../../types/Client';
-import { componentVisibility } from '../../utils/componentVisibility';
 import { defineRoot } from '../../utils/defineRoot';
 import { getLocation } from '../../utils/getLocation';
 import { getSessionStorageData } from '../../utils/handleStorage';
-import { mapLinker } from '../../utils/mapLinker';
 import { removeInvalidChar } from '../../utils/removeInvalidChar';
 import { setEventListener } from '../../utils/setButton';
 import { clientRow } from './components/clientRow';
@@ -95,20 +94,5 @@ function setEditBtns() {
 
   editBtns.forEach((btn) => {
     setEventListener(btn.id, 'click', () => editClient(btn.id));
-  });
-}
-
-function setLocationBtns() {
-  const locationBtns = <NodeListOf<HTMLElement>>document.querySelectorAll('.location');
-
-  locationBtns.forEach((btn) => {
-    const clientId = btn.id.replace('location', '');
-
-    btn.addEventListener('click', () => {
-      const clients: Client[] = getSessionStorageData('clients');
-      const client = clients.find((item) => item.id === clientId)!;
-
-      window.open(mapLinker(client), '_blank');
-    });
   });
 }

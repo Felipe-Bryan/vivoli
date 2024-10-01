@@ -1,4 +1,5 @@
 import { Client } from '../../../types/Client';
+import { checkEvenWeek } from '../../../utils/checkEvenWeek';
 import { getSessionStorageData } from '../../../utils/handleStorage';
 import { setDiaSemana } from '../../../utils/semana';
 import { clientRow } from './clientRow';
@@ -6,8 +7,26 @@ import { clientRow } from './clientRow';
 export function main() {
   const diaSemana = setDiaSemana();
   const clients: Client[] = getSessionStorageData('clients');
+  const evenWeek: boolean = checkEvenWeek();
 
-  const todayClients = clients.filter((item) => item.diaSemana === diaSemana);
+  const dayClients = clients.filter((item) => item.diaSemana === diaSemana);
+  const todayClients: Client[] = [];
+
+  dayClients.forEach((client) => {
+    if (client.frequencia === 'S') {
+      todayClients.push(client);
+    }
+
+    if (client.frequencia === 'A' && evenWeek === false) {
+      todayClients.push(client);
+    }
+
+    if (client.frequencia === 'B' && evenWeek === true) {
+      todayClients.push(client);
+    }
+  });
+
+  console.log(evenWeek);
 
   let line = `
 <div class="d-flex justify-content-around mb-2">
