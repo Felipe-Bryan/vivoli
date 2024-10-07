@@ -1,4 +1,5 @@
 import { getStorageData } from '../../utils/handleStorage';
+import { todayString } from '../../utils/todayString';
 
 export function checkLogged(): boolean {
   const user = getStorageData('user');
@@ -6,7 +7,7 @@ export function checkLogged(): boolean {
   if (!user) {
     return false;
   } else {
-    const today = `${new Date().getDate()}/${new Date().getMonth() + 1}`;
+    const today = todayString();
 
     if (user.date !== today) {
       return false;

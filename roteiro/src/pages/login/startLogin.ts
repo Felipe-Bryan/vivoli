@@ -3,6 +3,7 @@ import { apiPost } from '../../service/api.service';
 import { saveToStorage } from '../../utils/handleStorage';
 import { startApp } from '../app/startApp';
 import { checkLogged } from './checkLogged';
+import { todayString } from '../../utils/todayString';
 
 export function startLogin() {
   const logged: boolean = checkLogged();
@@ -38,7 +39,7 @@ export function startLogin() {
 
       await apiPost('auth', loginInfo)
         .then((data) => {
-          const logged = { ...data.data, date: `${new Date().getDate()}/${new Date().getMonth() + 1}` };
+          const logged = { ...data.data, date: todayString() };
 
           saveToStorage('user', logged);
 
