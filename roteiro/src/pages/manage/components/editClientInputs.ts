@@ -2,8 +2,7 @@ import { blockButton } from '../../../components/blockButton';
 import { inputGroup } from '../../../components/inputGroup';
 import { SelectOptionItem, selectForm } from '../../../components/selectForm';
 import { Client } from '../../../types/Client';
-import { getSessionStorageData, saveToSessionStorage } from '../../../utils/handleStorage';
-import { maskBirth, maskCep, maskCPF, maskPhone } from '../../../utils/masks';
+import { getSessionStorageData } from '../../../utils/handleStorage';
 
 export function editInputs(client: Client) {
   const diasSemana: SelectOptionItem[] = [

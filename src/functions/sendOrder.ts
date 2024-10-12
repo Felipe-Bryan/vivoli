@@ -11,7 +11,7 @@ export function sendOrder() {
   const orderValue = calcTotalvalueOrdersToSend(order);
 
   setTimeout(() => {
-    if (orderValue > 350) {
+    if (orderValue > 1) {
       const phone = getUrlValue('t');
 
       const msgContent = encodeURIComponent(textGenerate(order));
@@ -26,7 +26,7 @@ export function sendOrder() {
 
       localStorage.removeItem('order');
     } else {
-      alertModal('Atenção', 'Pedido deve ser superior a R$ 350,00', 'Fechar');
+      alertModal('Atenção', 'Pedido deve ser superior a R$ 1,00', 'Fechar');
 
       document.getElementById('openModal')!.click();
 
