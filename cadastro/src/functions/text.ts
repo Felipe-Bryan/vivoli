@@ -2,7 +2,7 @@ import { Client } from '../types/Client';
 
 export function text(client: Client) {
   return `
-- - - - - - - - - - - - - - - - - - - - - - - -
+
 *Dados Pessoais*
 - - - - - - - - - - - - - - - - - - - - - - - -
 *Nome:* ${client.nome}
@@ -17,7 +17,7 @@ export function text(client: Client) {
 *Estado:* ${client.estadoR}
 *Telefone:* ${client.tel}
 *Email:* ${client.email}
-\n- - - - - - - - - - - - - - - - - - - - - - - -
+
 *Dados Comerciais*
 - - - - - - - - - - - - - - - - - - - - - - - -
 *Tipo Estabelecimento:* ${client.tipo}
