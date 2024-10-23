@@ -59,10 +59,10 @@ export async function registerClient() {
     await getCep(cep)
       .then((data: any) => {
         if (data) {
-          inputs.endereco.value = data.street;
-          inputs.bairro.value = data.district;
-          inputs.cidade.value = data.city;
-          inputs.estado.value = data.stateShortname;
+          inputs.endereco.value = data.logradouro;
+          inputs.bairro.value = data.bairro;
+          inputs.cidade.value = data.localidade;
+          inputs.estado.value = data.uf;
         }
       })
       .catch(() => {
