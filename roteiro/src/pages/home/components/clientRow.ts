@@ -23,12 +23,12 @@ export function clientRow(client: Client) {
     <div class="col-6">
         <i 
             class="bi bi-ban text-danger fw-bold"
-            ${client.bloqueado ? '' : `style="display: none !important"`}> Bloqueado</i>
+            ${client.bloqueado ? `style="display: none !important"` : `style="display: none !important"`}> Bloqueado</i>
     </div>
     <div class="col-6 p-0 px-1 d-flex justify-content-end">
         <div class="form-check">
             <input 
-                class="form-check-input"
+                class="form-check-input check"
                 type="checkbox" 
                 value="" 
                 id="check-${client.id}" 
@@ -38,3 +38,5 @@ export function clientRow(client: Client) {
     </div>
 </div>`;
 }
+
+// Exibe 'Bloqueado' com bug, resolver bug na api antes de exibir info

@@ -7,6 +7,8 @@ export function getTodayString() {
 
   if (today < 10) {
     todayString = '0' + today;
+  } else {
+    todayString = String(today);
   }
 
   const month = meses[new Date().getMonth()];

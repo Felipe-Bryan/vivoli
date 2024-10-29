@@ -33,3 +33,13 @@ export async function apiPut(url: string, info: any) {
 
   return result;
 }
+
+export async function apiDelete(url: string) {
+  let result: any;
+
+  await api.delete(`vivoli/${url}`).then((data) => {
+    result = data.data;
+  });
+
+  return result;
+}

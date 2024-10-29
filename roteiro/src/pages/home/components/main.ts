@@ -26,8 +26,6 @@ export function main() {
     }
   });
 
-  console.log(evenWeek);
-
   let line = `
 <div class="d-flex justify-content-around mb-2">
     <div class="fw-bold fs-4">${diaSemana}</div>

@@ -10,19 +10,22 @@ export function clientRow(client: Client) {
       <i class="bi bi-geo-alt-fill text-primary p-1 px-3 fs-5"></i>
     </div>
   </div>
+
   <div class="d-flex justify-content-between align-items-center">
-    <div class="w-75">
-      <div class="p-0">${maskCPF(client.cnpj)}</div>
-      <div class="p-0">${client.cidade}</div>
+    <div class="p-0">${maskCPF(client.cnpj)}</div>
+    <div class="text-center">
+      <i
+        class="bi bi-pencil-fill text-success p-1 px-3 manageClient"
+        id="${client.id}"
+        data-bs-toggle="modal"
+        data-bs-target="#modal"></i>
     </div>
-    <div class="pe-1">
-      <div class="text-center">
-        <i
-          class="bi bi-pencil-fill text-success p-1 px-2 manageClient"
-          id="${client.id}"
-          data-bs-toggle="modal"
-          data-bs-target="#modal"></i>
-      </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="p-0">${client.cidade}</div>
+    <div class="text-center">
+      <i class="bi bi-trash-fill text-danger p-1 px-3 deleteClient" id="del-${client.id}"></i>
     </div>
   </div>
 </div>`;

@@ -7,6 +7,7 @@ import { removeInvalidChar } from '../../utils/removeInvalidChar';
 import { setEventListener } from '../../utils/setButton';
 import { clientRow } from './components/clientRow';
 import { manageComponent } from './components/manageComponent';
+import { deleteClient } from './deleteClient';
 import { editClient } from './editClient';
 
 export function startManage() {
@@ -25,6 +26,7 @@ export function startManage() {
   });
 
   setEditBtns();
+  setDeleteBtns();
   setLocationBtns();
 
   const totalSpot = document.getElementById('totalClients')!;
@@ -45,6 +47,7 @@ export function startManage() {
       totalSpot.innerHTML = `Total de clientes: ${clients.length}`;
 
       setEditBtns();
+      setDeleteBtns();
       setLocationBtns();
     } else {
       spot.innerHTML = '';
@@ -84,6 +87,7 @@ export function startManage() {
       totalSpot.innerHTML = `Total de clientes: ${checked.size}`;
 
       setEditBtns();
+      setDeleteBtns();
       setLocationBtns();
     }
   });
@@ -94,5 +98,15 @@ function setEditBtns() {
 
   editBtns.forEach((btn) => {
     setEventListener(btn.id, 'click', () => editClient(btn.id));
+  });
+}
+
+function setDeleteBtns() {
+  const delBtns = <NodeListOf<HTMLElement>>document.querySelectorAll('.deleteClient');
+
+  delBtns.forEach((btn) => {
+    const id = btn.id.replace('del-', '');
+
+    setEventListener(btn.id, 'click', () => deleteClient(id));
   });
 }
