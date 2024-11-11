@@ -10,7 +10,7 @@ export function sendOrder() {
 
   const orderValue = calcTotalvalueOrdersToSend(order);
 
-  const minOrderValue = 150;
+  const minOrderValue = 100;
 
   setTimeout(() => {
     if (orderValue > minOrderValue) {
@@ -28,7 +28,7 @@ export function sendOrder() {
 
       localStorage.removeItem('order');
     } else {
-      alertModal('Atenção', `Pedido deve ser superior a R$ ${minOrderValue},00`, 'Fechar');
+      alertModal('Atenção', `Pedido deve ser superior a R$ ${minOrderValue.toFixed(2)}`, 'Fechar');
 
       document.getElementById('openModal')!.click();
 
