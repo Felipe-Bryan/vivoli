@@ -1,6 +1,6 @@
-import { Product } from '../types/Product';
+import { Produto } from '../types/Produto';
 
-export const produtos: Product[] = [
+export const produtos: Produto[] = [
   {
     id: 'p1',
     nome: 'Picolé Le Petit Tuti Frutti',

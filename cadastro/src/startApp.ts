@@ -43,8 +43,6 @@ export function startApp() {
 
     await getCep(cep)
       .then((data: any) => {
-        console.log(data);
-
         if (data) {
           enderecoRIpt.value = data.logradouro;
           bairroRIpt.value = data.bairro;
