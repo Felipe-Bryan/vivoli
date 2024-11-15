@@ -2,6 +2,7 @@ import { homeHeader } from '../components/homeHeader';
 import { modal } from '../components/modal';
 import { root } from '../utils/root';
 import { startClients } from './clients';
+import { startNewOrder } from './order';
 
 export function startHome() {
   root.innerHTML = homeHeader();
@@ -20,5 +21,11 @@ export function startHome() {
 
   viewClientsBtn.addEventListener('click', () => {
     startClients();
+  });
+
+  const newOrderBtn = document.getElementById('newOrder')!;
+
+  newOrderBtn.addEventListener('click', () => {
+    startNewOrder();
   });
 }

@@ -46,15 +46,6 @@ export const produtos: Product[] = [
   { id: 'p14', nome: 'Picolé Di Leite Chocolate', custo: 2.45, caixaQt: 28, sugestao: 3.5, caixa: true, familia: 'f4' },
   { id: 'p15', nome: 'Picolé Di Leite Coco', custo: 2.45, caixaQt: 28, sugestao: 3.5, caixa: true, familia: 'f4' },
   {
-    id: 'p16',
-    nome: 'Picolé Di Leite Leite Condensado',
-    custo: 2.45,
-    caixaQt: 28,
-    sugestao: 3.5,
-    caixa: true,
-    familia: 'f4',
-  },
-  {
     id: 'p17',
     nome: 'Picolé Di Leite Limonada Suiça',
     custo: 2.45,

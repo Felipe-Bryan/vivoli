@@ -8,5 +8,5 @@ export function homeHeader() {
         <button type="button" class="btn btn-primary" id="viewClients">Clientes</button>
       </div>
 
-      <div class="container"></div>`;
+      <div class="container" id="pageContent"></div>`;
 }

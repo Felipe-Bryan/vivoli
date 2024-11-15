@@ -9,3 +9,9 @@ export function modal(props: ModalProps) {
   document.getElementById('modalBody')!.innerHTML = props.body;
   document.getElementById('modalFooter')!.innerHTML = props.footer;
 }
+
+export function modalClose() {
+  const btn = document.getElementById('modalClose')!;
+
+  btn.click();
+}

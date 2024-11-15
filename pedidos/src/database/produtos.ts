@@ -1,6 +1,6 @@
-import { Produto } from '../types/Produto';
+import { Product } from '../types/Product';
 
-export const produtos: Produto[] = [
+export const produtos: Product[] = [
   {
     id: 'p1',
     nome: 'Picolé Le Petit Tuti Frutti',
@@ -45,15 +45,6 @@ export const produtos: Produto[] = [
   { id: 'p12', nome: 'Picolé Di Fruta Uva', custo: 2.09, caixaQt: 28, sugestao: 3, caixa: true, familia: 'f3' },
   { id: 'p14', nome: 'Picolé Di Leite Chocolate', custo: 2.45, caixaQt: 28, sugestao: 3.5, caixa: true, familia: 'f4' },
   { id: 'p15', nome: 'Picolé Di Leite Coco', custo: 2.45, caixaQt: 28, sugestao: 3.5, caixa: true, familia: 'f4' },
-  {
-    id: 'p16',
-    nome: 'Picolé Di Leite Leite Condensado',
-    custo: 2.45,
-    caixaQt: 28,
-    sugestao: 3.5,
-    caixa: true,
-    familia: 'f4',
-  },
   {
     id: 'p17',
     nome: 'Picolé Di Leite Limonada Suiça',

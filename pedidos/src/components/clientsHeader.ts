@@ -7,5 +7,5 @@ export function clientsHeader() {
           </button>
         </div>
   
-        <div class="container"></div>`;
+        <div class="container" id="pageContent"></div>`;
 }

@@ -1,4 +1,4 @@
-export interface Produto {
+export interface Product {
   id: string;
   nome: string;
   custo: number;
@@ -6,5 +6,4 @@ export interface Produto {
   sugestao: number;
   caixa: boolean;
   familia: string;
-  qt?: number;
 }
