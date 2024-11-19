@@ -4,6 +4,7 @@ import { Client } from '../types/Client';
 import { Order } from '../types/Order';
 import { Pedido } from '../types/Pedido';
 import { getUrlValue } from '../utils/getUrlValue';
+import { invalidateInput } from '../utils/invalidateInput';
 import { getStorageData, saveToStorage } from '../utils/storageFunctions';
 import { textGenerate } from '../utils/textGenerate';
 import { calcTotalvalueOrdersToSend } from './calcTotalOrdersValue';
@@ -91,6 +92,22 @@ function finishSaveOrder() {
   const data = dataIpt.value;
   const id = idIpt.value;
 
+  if (data.length !== 8) {
+    alert('Informe a data no formato DDMMAAAA!');
+
+    invalidateInput(dataIpt);
+
+    return;
+  }
+
+  if (id.length === 0) {
+    alert('Informe o número do pedido!');
+
+    invalidateInput(idIpt);
+
+    return;
+  }
+
   order.data = data;
   order.id = id;
 
@@ -100,6 +117,11 @@ function finishSaveOrder() {
 
   saveToStorage('orders', orders);
 
-  const baseUrl = 'https://vivoli.vercel.app/';
-  window.location.replace(`${baseUrl}pedidos/`);
+  alertModal('Sucesso!', 'Pedido salvo com sucesso\nAguarde você será redirecionado para a página inicial', 'OK');
+  document.getElementById('openModal')!.click();
+
+  setTimeout(() => {
+    const baseUrl = 'https://vivoli.vercel.app/';
+    window.location.replace(`${baseUrl}pedidos/`);
+  }, 1000);
 }

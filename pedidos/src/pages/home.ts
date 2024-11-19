@@ -7,6 +7,7 @@ import { searchClient } from '../functions/searchClient';
 import { Client } from '../types/Client';
 import { getStorageData } from '../utils/handleStorage';
 import { root } from '../utils/root';
+import { startOrders } from './orders';
 // import { startClients } from './clients';
 
 export function startHome() {
@@ -33,6 +34,12 @@ export function startHome() {
 
   registerBtn.addEventListener('click', () => {
     registerClient();
+  });
+
+  const viewOrdersBtn = document.getElementById('viewOrders')!;
+
+  viewOrdersBtn.addEventListener('click', () => {
+    startOrders();
   });
 
   // const filterBtn = document.getElementById('filter')!;

@@ -35,3 +35,9 @@ export function maskCPF(number: string) {
     return `${numero.slice(0, 3)}.${numero.slice(3, 6)}.${numero.slice(6, 9)}-${numero.slice(9)}`;
   }
 }
+
+export function maskDate(number: string) {
+  const numero = number.replace(/\D/g, '');
+
+  return `${numero.slice(0, 2)}/${numero.slice(2, 4)}/${numero.slice(4)}`;
+}

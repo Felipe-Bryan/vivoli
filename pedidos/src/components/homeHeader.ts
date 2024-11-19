@@ -1,7 +1,7 @@
 export function homeHeader() {
   return `
 <div class="d-flex justify-content-end m-0 mb-2 p-0 px-2">        
-  <button type="button" class="btn btn-primary p-1 px-2 mx-2" id="viewHistory">Histórico</button>
+  <button type="button" class="btn btn-primary p-1 px-2 mx-2" id="viewOrders">Histórico</button>
   
   <button type="button" class="btn btn-primary p-1 px-2" data-bs-toggle="modal" data-bs-target="#modal" id="register">
     Cadastrar Cliente
