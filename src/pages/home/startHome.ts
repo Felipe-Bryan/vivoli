@@ -12,6 +12,13 @@ export function startHome() {
 
   if (hist === 'hist') {
     componentVisibility('home', 'show');
+
+    const homeBtn = document.getElementById('home')!;
+
+    homeBtn.addEventListener('click', () => {
+      const baseUrl = 'https://vivoli.vercel.app/';
+      window.location.replace(`${baseUrl}pedidos/`);
+    });
   }
   componentVisibility('cartContent', 'hide');
   componentVisibility('sendOrder', 'hide');

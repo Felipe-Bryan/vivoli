@@ -72,12 +72,12 @@ export function sendOrder() {
 function orderInfoIpt() {
   return `
 <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Data</span>
+  <span class="input-group-text w-25" id="basic-addon1">Data</span>
   <input type="text" class="form-control" placeholder="DDMMAAA" id="orderDate">
 </div>
 
 <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Numero</span>
+  <span class="input-group-text w-25" id="basic-addon1">Numero</span>
   <input type="text" class="form-control" placeholder="Número do pedido" id="orderId">
 </div>`;
 }
@@ -99,4 +99,7 @@ function finishSaveOrder() {
   orders.push(order);
 
   saveToStorage('orders', orders);
+
+  const baseUrl = 'https://vivoli.vercel.app/';
+  window.location.replace(`${baseUrl}pedidos/`);
 }

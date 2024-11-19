@@ -43,7 +43,7 @@ function addNewOrder(clients: Client[]) {
 
         saveToStorage('selectedClient', client);
 
-        const baseUrl = 'http://127.0.0.1:5500/';
+        const baseUrl = 'https://vivoli.vercel.app/';
         window.location.replace(`${baseUrl}?t=hist`);
       }
     });
