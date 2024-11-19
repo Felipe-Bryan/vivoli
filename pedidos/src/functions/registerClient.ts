@@ -1,5 +1,5 @@
 import { modal, modalClose } from '../components/modal';
-import { startClients } from '../pages/clients';
+import { startHome } from '../pages/home';
 import { Client } from '../types/Client';
 import { getStorageData, saveToStorage } from '../utils/handleStorage';
 import { invalidateInput } from '../utils/invalidateInput';
@@ -69,5 +69,5 @@ function saveClient() {
 
   modalClose();
 
-  startClients();
+  startHome();
 }

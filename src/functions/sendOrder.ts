@@ -1,7 +1,10 @@
 import { alertModal } from '../components/alertModal';
+import { SelectOptionItem } from '../components/selectForm';
+import { Client } from '../types/Client';
 import { Order } from '../types/Order';
+import { Pedido } from '../types/Pedido';
 import { getUrlValue } from '../utils/getUrlValue';
-import { getStorageData } from '../utils/storageFunctions';
+import { getStorageData, saveToStorage } from '../utils/storageFunctions';
 import { textGenerate } from '../utils/textGenerate';
 import { calcTotalvalueOrdersToSend } from './calcTotalOrdersValue';
 
@@ -16,17 +19,46 @@ export function sendOrder() {
     if (orderValue > minOrderValue) {
       const phone = getUrlValue('t');
 
-      const msgContent = encodeURIComponent(textGenerate(order));
+      if (phone === 'hist') {
+        const selectedClient: Client = getStorageData('selectedClient')!;
 
-      const link = `https://wa.me/55${phone}?text=${msgContent}`;
+        const selectedOrder: Order[] = [];
+        order.forEach((item) => {
+          if (item.qt > 0) {
+            selectedOrder.push(item);
+          }
+        });
 
-      alertModal('Enviando', 'Você será redirecionado ao WhatsApp', 'Fechar');
+        const pedido: Pedido = {
+          cliente: selectedClient.nome,
+          produtos: selectedOrder,
+          data: '',
+          valor: orderValue,
+          id: '',
+        };
 
-      document.getElementById('openModal')!.click();
+        saveToStorage('orderToSave', pedido);
 
-      window.location.replace(link);
+        alertModal('Informações do pedido', orderInfoIpt(), 'Cancelar', 'Concluir');
+        const saveBtn = document.getElementById('modalFollow')!;
+        document.getElementById('openModal')!.click();
 
-      localStorage.removeItem('order');
+        saveBtn.addEventListener('click', () => {
+          finishSaveOrder();
+        });
+      } else {
+        const msgContent = encodeURIComponent(textGenerate(order));
+
+        const link = `https://wa.me/55${phone}?text=${msgContent}`;
+
+        alertModal('Enviando', 'Você será redirecionado ao WhatsApp', 'Fechar');
+
+        document.getElementById('openModal')!.click();
+
+        window.location.replace(link);
+
+        localStorage.removeItem('order');
+      }
     } else {
       alertModal('Atenção', `Pedido deve ser superior a R$ ${minOrderValue.toFixed(2)}`, 'Fechar');
 
@@ -35,4 +67,36 @@ export function sendOrder() {
       return;
     }
   }, 1000);
+}
+
+function orderInfoIpt() {
+  return `
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Data</span>
+  <input type="text" class="form-control" placeholder="DDMMAAA" id="orderDate">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Numero</span>
+  <input type="text" class="form-control" placeholder="Número do pedido" id="orderId">
+</div>`;
+}
+
+function finishSaveOrder() {
+  const order: Pedido = getStorageData('orderToSave');
+
+  const dataIpt = <HTMLInputElement>document.getElementById('orderDate')!;
+  const idIpt = <HTMLInputElement>document.getElementById('orderId')!;
+
+  const data = dataIpt.value;
+  const id = idIpt.value;
+
+  order.data = data;
+  order.id = id;
+
+  const orders: Pedido[] = getStorageData('orders') || [];
+
+  orders.push(order);
+
+  saveToStorage('orders', orders);
 }

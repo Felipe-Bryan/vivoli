@@ -4,6 +4,7 @@ import { removeCartOrder } from '../../functions/removeCartOrder';
 import { sendOrder } from '../../functions/sendOrder';
 import { Order } from '../../types/Order';
 import { componentVisibility } from '../../utils/componentVisibility';
+import { getUrlValue } from '../../utils/getUrlValue';
 import { getStorageData } from '../../utils/storageFunctions';
 
 export function startCart() {
@@ -12,6 +13,7 @@ export function startCart() {
   componentVisibility('content', 'hide');
   componentVisibility('viewOrder', 'hide');
   componentVisibility('homeReturn', 'show');
+  componentVisibility('home', 'hide');
 
   window.scrollTo(0, 0);
 
@@ -25,7 +27,15 @@ export function startCart() {
     }
   });
 
-  document.getElementById('sendOrder')!.addEventListener('click', () => {
+  const sendBtn = document.getElementById('sendOrder')!;
+
+  if (getUrlValue('t') === 'hist') {
+    sendBtn.innerHTML = 'Salvar Pedido';
+  } else {
+    sendBtn.innerHTML = 'Enviar Pedido';
+  }
+
+  sendBtn.addEventListener('click', () => {
     sendOrder();
   });
 
