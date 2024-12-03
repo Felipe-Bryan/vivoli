@@ -25,12 +25,34 @@
     </nav>
 
     <div id="content">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Pesquisar</span>
-        <input type="text" class="form-control" placeholder="CPF/ CNPJ" />
-        <span class="input-group-text" id="basic-addon1">
-          <i class="bi bi-search"></i>
-        </span>
+      <div class="d-flex justify-content-start m-0 mb-2 p-0 px-2">
+        <button type="button" class="btn btn-primary p-1 px-2 mx-2" id="viewOrders">Voltar</button>
+      </div>
+
+      <div class="container" id="pageContent">
+        <div class="row">
+          <div class="col fw-bold fst-italic">Nome do Cliente</div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col fst-italic">18/11/2024</div>
+          <div class="col fst-italic text-center">5430</div>
+          <div class="col fst-italic text-end">R$ 1000,00</div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center fw-bold fst-italic fs-5 border-bottom border-dark mb-1">Itens do pedido</div>
+        </div>
+
+        <div class="row">
+          <div class="col fst-italic">Nome do produto</div>
+        </div>
+
+        <div class="row border-bottom border-dark mb-1">
+          <div class="col-3">56 (2 cx)</div>
+          <div class="col text-center">UN: R$ 15,00</div>
+          <div class="col text-end">Total: R$ 150,00</div>
+        </div>
       </div>
     </div>
 
@@ -51,6 +73,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"></script>
-    <script src="./dist/bundle.js"></script>
+    <!-- <script src="./dist/bundle.js"></script> -->
   </body>
 </html>
