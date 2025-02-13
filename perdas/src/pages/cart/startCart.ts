@@ -29,12 +29,6 @@ export function startCart() {
 
   const sendBtn = document.getElementById('sendOrder')!;
 
-  if (getUrlValue('t') === 'hist') {
-    sendBtn.innerHTML = 'Salvar Pedido';
-  } else {
-    sendBtn.innerHTML = 'Enviar Pedido';
-  }
-
   sendBtn.addEventListener('click', () => {
     sendOrder();
   });
