@@ -1,0 +1,1 @@
+(()=>{"use strict";var t={531:(t,r)=>{Object.defineProperty(r,"__esModule",{value:!0}),r.startApp=void 0,r.startApp=function(){console.log("Start App")}}},r={};(0,function e(o){var p=r[o];if(void 0!==p)return p.exports;var s=r[o]={exports:{}};return t[o](s,s.exports,e),s.exports}(531).startApp)()})();
