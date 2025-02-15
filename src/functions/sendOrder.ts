@@ -1,4 +1,5 @@
 import { alertModal } from '../components/alertModal';
+import { Modal, modalFooter } from '../components/base-components/Modal';
 import { SelectOptionItem } from '../components/selectForm';
 import { Client } from '../types/Client';
 import { Order } from '../types/Order';
@@ -40,9 +41,27 @@ export function sendOrder() {
 
         saveToStorage('orderToSave', pedido);
 
-        alertModal('Informações do pedido', orderInfoIpt(), 'Cancelar', 'Concluir');
+        Modal({
+          id: 'orderInfo',
+          content: orderInfoIpt(),
+          title: 'Informações do pedido',
+          footer: modalFooter({
+            btns: 2,
+            btn1: {
+              color: 'danger',
+              id: 'cancelAlert',
+              label: 'OK',
+              additionalProps: 'data-bs-dismiss="modal"',
+            },
+            btn2: {
+              color: 'success',
+              id: 'modalFollow',
+              label: 'Concluir',
+            },
+          }),
+        });
+
         const saveBtn = document.getElementById('modalFollow')!;
-        document.getElementById('openModal')!.click();
 
         saveBtn.addEventListener('click', () => {
           finishSaveOrder();
@@ -52,18 +71,20 @@ export function sendOrder() {
 
         const link = `https://wa.me/55${phone}?text=${msgContent}`;
 
-        alertModal('Enviando', 'Você será redirecionado ao WhatsApp', 'Fechar');
-
-        document.getElementById('openModal')!.click();
+        alertModal({
+          title: 'Enviando',
+          content: 'Você será redirecionado ao WhatsApp',
+        });
 
         window.location.replace(link);
 
         localStorage.removeItem('order');
       }
     } else {
-      alertModal('Atenção', `Pedido deve ser superior a R$ ${minOrderValue.toFixed(2)}`, 'Fechar');
-
-      document.getElementById('openModal')!.click();
+      alertModal({
+        title: 'Atenção!',
+        content: `Pedido deve ser superior a R$ ${minOrderValue.toFixed(2)}!`,
+      });
 
       return;
     }
@@ -117,8 +138,10 @@ function finishSaveOrder() {
 
   saveToStorage('orders', orders);
 
-  alertModal('Sucesso!', 'Pedido salvo com sucesso\nAguarde você será redirecionado para a página inicial', 'OK');
-  document.getElementById('openModal')!.click();
+  alertModal({
+    title: 'Sucesso!',
+    content: 'Pedido salvo com sucesso\nAguarde você será redirecionado para a página inicial',
+  });
 
   setTimeout(() => {
     const baseUrl = 'https://vivoli.vercel.app/';

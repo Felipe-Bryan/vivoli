@@ -1,6 +1,8 @@
 import { alertModal } from '../components/alertModal';
+import { Modal, modalFooter } from '../components/base-components/Modal';
 import { produtos } from '../database/produtos';
 import { Order } from '../types/Order';
+import { Product } from '../types/Product';
 import { getStorageData } from '../utils/storageFunctions';
 import { setEmptyOrder } from './setEmptyOrder';
 
@@ -55,12 +57,27 @@ export function checkOrder() {
     }
 
     if (ordered > 0) {
-      alertModal(
-        'Atenção',
-        'Existe um pedido salvo e não enviado, deseja continuar o pedido?',
-        'Continuar pedido',
-        'Iniciar novo'
-      );
+      Modal({
+        id: 'alertModal',
+        title: 'Atenção!',
+        content: 'Existe um pedido salvo e não enviado, deseja continuar o pedido?',
+        centered: true,
+        staticBackdrop: true,
+        footer: modalFooter({
+          btns: 2,
+          btn1: {
+            color: 'primary',
+            id: 'contBtn',
+            label: 'Continuar Pedido',
+            additionalProps: 'data-bs-dismiss="modal"',
+          },
+          btn2: {
+            color: 'danger',
+            id: 'modalFollow',
+            label: 'Iniciar Novo',
+          },
+        }),
+      });
 
       document.getElementById('openModal')!.click();
 
@@ -74,15 +91,14 @@ export function checkOrder() {
 }
 
 function updateAlert() {
-  alertModal(
-    'Atenção',
-    'Houve uma atualização nos produtos, o pedido salvo será deletado para que as atualizações façam efeito',
-    'Fechar'
-  );
+  alertModal({
+    title: 'Atenção',
+    content: 'Houve uma atualização nos produtos, o pedido salvo será deletado para que as atualizações façam efeito',
+  });
 
-  document.getElementById('openModal')!.click();
+  document.getElementById('cancelAlert')!.addEventListener('click', () => {
+    const produtos: Product[] = getStorageData('produtos');
 
-  document.getElementById('returnOption')!.addEventListener('click', () => {
     setEmptyOrder(produtos);
 
     window.location.reload();

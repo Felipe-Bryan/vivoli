@@ -48,7 +48,7 @@ ${props.staticBackdrop ? ` data-bs-backdrop="static" data-bs-keyboard="false"` :
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="${props.id}Label">${props.title}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" id="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         ${props.content}
@@ -81,6 +81,10 @@ export function modalFooter(props: ModalFooterProps) {
   const btns = `${btn1}${btn2}`;
 
   return btns;
+
+  // data-bs-dismiss="modal"
 }
 
-// data-bs-dismiss="modal"
+export function modalClose() {
+  document.getElementById('closeModal')!.click();
+}

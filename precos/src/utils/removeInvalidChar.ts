@@ -1,7 +1,8 @@
 export function removeInvalidChar(value: string) {
   let string = value
     .toLowerCase()
-    .replace(' ', '')
+    .replace(' ', '-')
+    .replace(',', '-')
     .replace('á', 'a')
     .replace('â', 'a')
     .replace('à', 'a')

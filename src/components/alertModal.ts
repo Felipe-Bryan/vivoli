@@ -1,15 +1,30 @@
-export function alertModal(title: string, body: string, returnOption: string, followOption?: string) {
-  document.getElementById('alertModalLabel')!.innerHTML = title;
+import { Modal, modalFooter } from './base-components/Modal';
 
-  document.getElementById('modalBody')!.innerHTML = body;
+interface AlertProps {
+  title: string;
+  content: string;
+}
 
-  if (followOption) {
-    document.getElementById('modalFooter')!.innerHTML = `
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${returnOption}</button>
-    <button type="button" class="btn btn-primary" id="modalFollow">${followOption}</button>
-    `;
-  } else {
-    document.getElementById('modalFooter')!.innerHTML = `
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="returnOption">${returnOption}</button>`;
-  }
+export function alertModal(props: AlertProps) {
+  return Modal({
+    id: 'alert',
+    title: props.title,
+    centered: true,
+    staticBackdrop: true,
+    content: props.content,
+    footer: modalFooter({
+      btns: 1,
+      btn1: {
+        color: 'danger',
+        id: 'cancelAlert',
+        label: 'OK',
+        additionalProps: 'data-bs-dismiss="modal"',
+      },
+      btn2: {
+        color: 'danger',
+        id: 'bt2',
+        label: 'OK',
+      },
+    }),
+  });
 }

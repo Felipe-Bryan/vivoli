@@ -1,20 +1,23 @@
-import { checkOrder } from './functions/checkOrder';
-import { sendOrder } from './functions/sendOrder';
-import { startCart } from './pages/cart/startCart';
-import { startHome } from './pages/home/startHome';
+import { alertModal } from './components/alertModal';
+import { apiGet } from './services/api.service';
+import { startApp } from './startApp';
+import { saveToStorage } from './utils/storageFunctions';
 
-checkOrder();
+Promise.all([
+  apiGet('vivoli/familia').then((data) => {
+    saveToStorage('familias', data.data);
+  }),
 
-startHome();
-
-document.getElementById('viewOrder')!.addEventListener('click', () => {
-  startCart();
-});
-
-document.getElementById('sendOrder')!.addEventListener('click', () => {
-  sendOrder();
-});
-
-document.getElementById('homeReturn')!.addEventListener('click', () => {
-  startHome();
-});
+  apiGet('vivoli/produto').then((data) => {
+    saveToStorage('produtos', data.data);
+  }),
+])
+  .then(() => {
+    startApp();
+  })
+  .catch(() => {
+    alertModal({
+      title: 'Erro!',
+      content: 'Erro ao buscar dados do servidor!',
+    });
+  });

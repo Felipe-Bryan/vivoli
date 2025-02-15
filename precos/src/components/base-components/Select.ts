@@ -1,6 +1,6 @@
 export function Select(props: SelectProps) {
   let result = `
-<div class="m-0 mb-2 px-2">
+<div class="m-0 mb-2 p-0">
     <select class="form-select m-0${props.additionalClass ? ` ${props.additionalClass}` : ''}" id="${props.id}">
         <option selected disabled value="0">${props.title}</option>`;
 
@@ -29,4 +29,16 @@ export interface SelectProps {
   title: string;
   options: SelectOptionProps[];
   additionalClass?: string;
+}
+
+export function checkSelectedValue(value: string) {
+  const options = document.querySelectorAll('option');
+
+  options.forEach((option) => {
+    option.removeAttribute('selected');
+
+    if (option.value === value) {
+      option.setAttribute('selected', '');
+    }
+  });
 }
