@@ -9,7 +9,7 @@ import { setEmptyOrder } from './setEmptyOrder';
 export function checkOrder() {
   const order: Order[] = getStorageData('order');
 
-  if (order.length === 0) {
+  if (!order) {
     setEmptyOrder(produtos);
   } else {
     let ordered = 0;
