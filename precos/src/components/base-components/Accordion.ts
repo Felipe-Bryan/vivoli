@@ -1,5 +1,5 @@
 export function Accordion(id: string) {
-  return `<div class="accordion" id="${id}"></div>`;
+  return `<div class="accordion mb-2" id="${id}"></div>`;
 }
 
 interface AccordionButtonProps {

@@ -6,10 +6,13 @@ import { familias } from '../../database/familias';
 import { produtos } from '../../database/produtos';
 import { createProduct } from '../../functions/createProduct';
 import { editProduct } from '../../functions/editProduct';
+import { reloadCount } from '../../functions/reloadCount';
 import { apiPut } from '../../service/api.service';
 import { accordionId, homeComponent } from './homeComponent';
 
 export function startHome() {
+  reloadCount();
+
   Root.innerHTML = homeComponent();
 
   const accordionContent = document.getElementById(accordionId)!;

@@ -3,6 +3,7 @@ import { Modal, modalClose, modalFooter } from '../components/base-components/Mo
 import { productModal } from '../components/productModal';
 import { apiPost } from '../service/api.service';
 import { Product } from '../types/Product';
+import { storageKey } from './reloadCount';
 import { validateProduct } from './validateProduct';
 
 export function createProduct() {
@@ -63,6 +64,8 @@ export function createProduct() {
             content: `<div>Produto criado com sucesso!</div>
           <div>A página será recarregada automaticamente.</div>`,
           });
+
+          localStorage.removeItem(storageKey);
 
           setTimeout(() => {
             location.reload();

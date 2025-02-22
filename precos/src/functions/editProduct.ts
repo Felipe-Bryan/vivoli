@@ -5,6 +5,7 @@ import { productModal } from '../components/productModal';
 import { produtos } from '../database/produtos';
 import { apiDelete, apiPut } from '../service/api.service';
 import { Product } from '../types/Product';
+import { storageKey } from './reloadCount';
 import { validateProduct } from './validateProduct';
 
 export function editProduct(id: string) {
@@ -69,6 +70,8 @@ export function editProduct(id: string) {
           <div>A página será recarregada automaticamente.</div>`,
           });
 
+          localStorage.removeItem(storageKey);
+
           setTimeout(() => {
             location.reload();
           }, 1000);
@@ -102,6 +105,8 @@ export function editProduct(id: string) {
             content: `<div>Produto excluído com sucesso!</div>
         <div>A página será recarregada automaticamente.</div>`,
           });
+
+          localStorage.removeItem(storageKey);
 
           setTimeout(() => {
             location.reload();

@@ -1,12 +1,12 @@
 import { dateString } from '../utils/handleDate';
-import { getStorageData, saveToStorage } from '../utils/storageFunctions';
+import { getStorageData, saveToStorage } from '../utils/handleStorage';
 
 interface ReloadProps {
   date1: string;
   date2: string;
 }
 
-const storageKey: string = 'reloads';
+export const storageKey: string = 'reloads-precos';
 
 export function reloadCount() {
   const reloads: ReloadProps = getStorageData(storageKey);

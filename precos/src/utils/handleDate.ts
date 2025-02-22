@@ -37,6 +37,10 @@ export function getHourString() {
   return `${hour}:${min}`;
 }
 
-export function fullDateString() {
+export function fullTimeString() {
   return `${getWeekDay()} - ${getTodayString()}/${getMonthString()}/${getYearString()} ${getHourString()}`;
+}
+
+export function dateString() {
+  return `${getTodayString()}/${getMonthString()}/${getYearString()}`;
 }

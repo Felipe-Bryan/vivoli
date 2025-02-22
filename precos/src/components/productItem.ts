@@ -6,7 +6,7 @@ import { Checkbox } from './base-components/Checkbox';
 
 export function productItem(product: Product) {
   let line = `
-<div class="container-fluid border-bottom border-2 mb-2 bg-light">
+<div class="container-fluid border-bottom border-2 bg-light">
   <div class="row">
     <div class="col p-0 fw-semibold fst-italic">${product.nome}</div>
   </div>
