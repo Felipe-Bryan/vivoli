@@ -2,8 +2,8 @@ import { dateString } from '../utils/handleDate';
 import { getStorageData, saveToStorage } from '../utils/storageFunctions';
 
 interface ReloadProps {
-  date: string;
-  counter: number;
+  date1: string;
+  date2: string;
 }
 
 export function reloadCount() {
@@ -13,9 +13,8 @@ export function reloadCount() {
   // const today = '18/02/2025';
 
   let current: ReloadProps = {
-    date: dateString(),
-    // date: '18/02/2025',
-    counter: 1,
+    date1: today,
+    date2: '-',
   };
 
   if (!reloads) {
@@ -23,10 +22,23 @@ export function reloadCount() {
 
     location.reload();
   } else {
-    if (reloads.date != today) {
+    if (reloads.date1 != today) {
       saveToStorage('reloads', current);
 
       location.reload();
+    } else if (reloads.date2 != today) {
+      reloads.date2 = today;
+
+      saveToStorage('reloads', reloads);
+
+      location.reload();
     }
+    // else if (reloads.date3 != today) {
+    //   reloads.date3 = today;
+
+    //   saveToStorage('reloads', reloads);
+
+    //   location.reload();
+    // }
   }
 }
