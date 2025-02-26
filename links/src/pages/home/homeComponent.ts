@@ -17,13 +17,26 @@ export function homeComponent() {
     id: 'pedido',
     label: 'Pedidos (Cliente)',
     copyBtn: true,
+    toTel: true,
   })}
 
-    ${linkComponent({
-      id: 'cadastro',
-      label: 'Cadastro (Cliente)',
-      copyBtn: true,
-    })}
+  ${linkComponent({
+    id: 'cadastro',
+    label: 'Cadastro (Cliente)',
+    copyBtn: true,
+    toTel: true,
+  })}
+
+  ${linkComponent({
+    id: 'perdas',
+    label: 'Perdas (Vendedor)',
+    toTel: true,
+  })}
+
+  ${linkComponent({
+    id: 'precos',
+    label: 'Gerenciar produtos',
+  })}
 </div>`;
 
   return line;

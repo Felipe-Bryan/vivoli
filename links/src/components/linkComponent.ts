@@ -5,6 +5,7 @@ interface LinkProps {
   id: string;
   label: string;
   copyBtn?: boolean;
+  toTel?: boolean;
 }
 
 export function linkComponent(props: LinkProps) {
@@ -14,8 +15,8 @@ export function linkComponent(props: LinkProps) {
       <div class="col text-center mb-1 fw-bold">${props.label}</div>
   </div>
   <div class="row">
-      <a target="_blank" class="col text-center mb-1 text-primary link" id="${props.id}">
-        ${url}/${props.id}/?t=
+      <a target="_blank" class="col text-center mb-1 text-primary link${props.toTel ? ' toTel' : ''}" id="${props.id}">
+        ${props.toTel ? `${url}/${props.id}/?t=` : `${url}/${props.id}/`}
       </a>
   </div>
 
