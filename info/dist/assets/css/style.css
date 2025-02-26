@@ -1,0 +1,35 @@
+:root {
+  --bg-first: #ffffff;
+  --bg-second: #fa28ef;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff00;
+  position: relative;
+}
+
+.background {
+  background: var(--bg-first);
+  background: linear-gradient(0deg, var(--bg-second) 0%, var(--bg-first) 50%, var(--bg-first) 100%);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  z-index: -9999;
+  height: 100vh;
+  width: 100vw;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.content {
+  min-height: 90vh;
+}
+
+.img-logo {
+  height: 5rem;
+}

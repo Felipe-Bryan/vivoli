@@ -100,17 +100,5 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "exclude": [
-    "abertura",
-    "ativos",
-    "cadastro",
-    "info",
-    "links",
-    "pedido",
-    "pedidos",
-    "perdas",
-    "precos",
-    "rota",
-    "roteiro"
-  ]
+  "exclude": ["abertura", "ativos", "cadastro", "pedidos", "perdas", "precos", "rota", "roteiro"]
 }
